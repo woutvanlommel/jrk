@@ -1,0 +1,258 @@
+*{box-sizing: border-box;}
+
+body{
+    margin: 0px
+}
+
+header{
+    color: white;
+    background-image: ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    padding: 20vh;
+    margin: 0px
+}
+
+main{
+    margin-left: 50px;
+    margin-right: 50px; 
+    max-width: 1000px;
+    justify-self: center;
+}
+
+footer{
+    margin: 0px
+}
+
+.footer{
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+h1{
+    text-align: center; 
+}
+
+.navbar{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    justify-items: center;
+    background-color: hsl(0, 0%, 20%);
+    padding: px 0;                         /* ← hier stond bij jou nog 0 */
+    transition: background-color .3s ease, padding .3s ease;
+    z-index: 1000;
+}
+
+.navbar.scrolled{
+    background-color: hsla(0, 0%, 40%, 0.5);  /* lichter grijs */
+    padding: 0px 0;  
+}
+
+.navbar a{
+    color: white;
+    text-decoration: none;
+    padding: 20px 50px;
+    display: block; 
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, padding 0.3s ease;
+    background-color: hsl(0, 0%, 20%);
+}
+
+
+.navbar.scrolled a{
+    background-color: transparent;
+    padding: 10px 50px;
+}
+
+.navbar ul{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.navbar a:hover{
+    background-color: hsl(0, 0%, 10%);
+    border-radius: 10px;
+    cursor: pointer;
+}
+.navbar li{
+    float: left;
+}
+
+.main{
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    justify-self: center;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+   
+}
+
+.content{
+    overflow: hidden;
+    height: 100%;
+    align-content: center;
+}
+
+.images{
+    display: flex;
+    justify-content: space-between;
+}
+
+.contentblock{
+    width: 30%;
+    background-color: hsl(0, 0%, 95%);
+    padding: 10px;
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 20px;
+}
+
+.contentblock img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.buttonbox{
+    justify-items: center;
+}
+
+
+
+button:hover{
+    background-color: hsl(0, 0%, 10%);
+    cursor: pointer;
+}
+
+@media screen and (max-width:700px) {
+    .navbar a{
+    padding: 10px 20px;
+}
+.navbar.scrolled{
+    background-color: hsla(0, 0%, 40%, 0.5);  /* lichter grijs */
+    padding: 0px 0;  
+}
+.navbar.scrolled a{
+    padding: 5px 15px;
+}
+.images img{
+    width: 100%;
+    margin-bottom: 10px;
+}
+.images{
+    display: block;
+}
+.contentblock{
+    width: 100%;
+}
+.contentblock:not(:first-child){
+    display: none;
+}
+}
+
+#sunday{
+    color: red;
+}
+
+.primarybutton{
+    background-color: hsl(0, 0%, 20%);
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 4px 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.primarybutton:hover{
+    background-color: hsl(0, 0%, 10%);
+    color: lightgray;
+    box-shadow: 2px 2px 5px lightgray;
+}
+
+
+.table{
+    justify-self: left;
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.tablecontent{
+    justify-items: center;
+}
+
+
+.store{
+   display: flex;
+   align-items: flex-start;
+   margin-top: 3vh;
+   margin-bottom: 3vh;
+}
+
+.textstore{
+    width: 50%;
+}
+
+
+.gallery{
+    display:inline-block;
+    border: 1px solid;
+    width: 50%;
+    margin-right: 16px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+
+.gallery2{
+    display:inline-block;
+    border: 1px solid;
+    width: 50%;
+    margin-left: 16px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.description{
+    padding: 10px;
+    text-align: center;
+
+}
+
+@media screen and (max-width:700px) {
+    .store{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gallery,
+    .gallery2,
+    .textstore{
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }.store{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gallery,
+    .gallery2,
+    .textstore{
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .gallery {order: 1;}
+    .textstore {order: 2;}
+}

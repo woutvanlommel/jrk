@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="" href="">
+    <title>Jeugd Rode Kruis Herckenrode</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const navbar = document.querySelector('.navbar');
+      const threshold = 50;
+  
+      window.addEventListener('scroll', function() {
+        // let op: hier gebruik je scrollY (niet scrollly!)
+        if (window.scrollY > threshold) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+    });
+  </script>
+
+<body>
+
+    <nav class="navbar"> 
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">About us</a></li>
+            <li><a href="">Products</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+    </nav>
+
+   <header>
+        <h1>Jeugd Rode Kruis Herckenrode</h1>
+   </header>
+
+    <main>
+
+        <div class="store">
+            <div class="gallery">
+                <a target="_blank" href="img/ZaraStore3.webp">
+                    <img src="img/ZaraStore3.webp" alt="Zara Store Antwerpen" width="100%">
+                </a>
+                <div class="description">Zara Store Antwerpen</div>
+            </div>
+
+            <div class="textstore">
+                <h3>Wie zijn wij?</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum eum ipsum obcaecati tempore, ad minima! Quaerat assumenda et quasi tempore placeat! Deserunt id ducimus tenetur sit perspiciatis eligendi minus consequuntur!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab consequuntur reprehenderit tempora voluptate eaque, fugiat cum unde natus totam culpa animi perferendis itaque vero porro nesciunt alias repellat quo accusantium!</p>
+            </div>
+        </div> 
+
+
+
+        <div class="store">
+            <div class="textstore">
+                <h3>Wat doen wij?</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro dolore molestiae eum sequi voluptate delectus quidem, ipsum nesciunt assumenda dolores repellat veniam neque iure, obcaecati, non placeat in perferendis repudiandae?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, quidem explicabo molestiae illum vero tempora deleniti odit iste, sunt excepturi esse dicta pariatur voluptas omnis maxime doloremque, beatae distinctio tempore?</p>
+            </div>
+
+            <div class="gallery2">
+                <a target="_blank" href="img/ZaraStore3.webp">
+                    <img src="img/ZaraStore3.webp" alt="Zara Store Brussel" width="100%">
+                </a>
+                <div class="description">Zara Store Brussel</div>
+            </div>
+           
+        </div>
+
+
+        <div class="store">
+            <div class="gallery">
+                <a target="_blank" href="img/ZaraStore3.webp">
+                    <img src="img/ZaraStore3.webp" alt="Zara Store Antwerpen" width="100%">
+                </a>
+                <div class="description">Zara Store Antwerpen</div>
+            </div>
+
+            <div class="textstore">
+                <h3>Waarom kiezen voor JRK?</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum eum ipsum obcaecati tempore, ad minima! Quaerat assumenda et quasi tempore placeat! Deserunt id ducimus tenetur sit perspiciatis eligendi minus consequuntur!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab consequuntur reprehenderit tempora voluptate eaque, fugiat cum unde natus totam culpa animi perferendis itaque vero porro nesciunt alias repellat quo accusantium!</p>
+            </div>
+        </div> 
+
+
+        <div class="main">
+            <div class="content">
+                <h3>Speciale activiteiten</h3>
+                <p id="p1">Elke maand wat nieuws!</p>
+
+                <div class="buttonbox">
+                    <div class="images">
+                        <div class="contentblock">
+                            <img src="img/ZaraStore.jpg" alt="Zara store entry">
+                            <h4>Kuringen kermis(t)</h4>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint veniam placeat provident excepturi odit eaque perspiciatis iure animi alias deserunt, recusandae, cupiditate voluptas cum ab optio, ipsum officia unde quos!</p>
+                        </div>
+                        <div class="contentblock">
+                            <img src="img/ZaraStore.jpg" alt="Zara store entry">
+                            <h4>Paardenmarkt</h4>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint veniam placeat provident excepturi odit eaque perspiciatis iure animi alias deserunt, recusandae, cupiditate voluptas cum ab optio, ipsum officia unde quos!</p>
+                        </div>
+                        <div class="contentblock">
+                            <img src="img/ZaraStore.jpg" alt="Zara store entry">
+                            <h4>Groot kamp</h4>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint veniam placeat provident excepturi odit eaque perspiciatis iure animi alias deserunt, recusandae, cupiditate voluptas cum ab optio, ipsum officia unde quos!</p>
+                        </div>
+                       
+                    </div>
+                    <br>
+                    <button class="primarybutton">
+                        Bekijk onze kalender
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+    </main>
+    
+</body>
+</html>
