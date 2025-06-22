@@ -12,7 +12,8 @@ header{
     background-attachment: fixed;
     background-size: cover;
     padding: 20vh;
-    margin: 0px
+    margin: 0px;
+    justify-items: center;
 }
 
 main{
@@ -41,13 +42,13 @@ h1{
     width: 100%;
     justify-items: center;
     background-color: hsl(0, 0%, 20%);
-    padding: px 0;                         /* ← hier stond bij jou nog 0 */
+    padding: 0px;
     transition: background-color .3s ease, padding .3s ease;
     z-index: 1000;
 }
 
 .navbar.scrolled{
-    background-color: hsla(0, 0%, 40%, 0.5);  /* lichter grijs */
+    background-color: hsla(0, 0%, 40%, 0.5);
     padding: 0px 0;  
 }
 
@@ -82,6 +83,107 @@ h1{
 }
 .navbar li{
     float: left;
+}
+
+
+.primarybutton{
+    background-color: hsl(0, 100%, 50%);
+    border-radius: 10px;
+    border: 0;
+    font-size: 16px;
+    padding: 8px 16px;
+    color: white;
+    cursor: pointer;
+}
+
+.primarybutton:hover{
+    background-color: hsl(0, 100%, 45%);
+    color: white;
+    box-shadow: 1px 1px 5px grey
+}
+
+
+
+.Intro{
+    display: flex;
+    align-items: flex-start;
+    margin: 10vh 0;
+}
+
+.Intro.reverse{
+    flex-direction: row-reverse;
+}
+
+.Introimg, .Introtext{
+    width: 50%;
+}
+
+.Introtext{
+    padding: 2rem;
+    padding-top: 0px;
+    padding-right: 0px;
+}
+
+.Intro.reverse .Introtext{
+    padding-left: 0px;
+}
+
+.Introimg img{
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 15px;
+    aspect-ratio: 16/9;
+}
+
+@media screen and (max-width:700px) {
+    .Intro{
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        margin: 0px;
+        margin-top: 2rem;
+        padding: 0px;
+        gap: 1rem;
+    }
+
+    .Intro h3{
+        padding-top: 0px;
+        margin-top: 0px;
+    }
+    .Introtext{
+        width: 100%;
+        height: auto;
+        padding: 0px;
+    }
+    
+    .Introimg{
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+        padding: 0px;
+    }
+
+    .Introtext{
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-bottom: 0px;
+        margin: 0px;
+    }
+
+    .Intro.reverse{
+        flex-direction: column;
+    }
+
+    .Intro.reverse .Introimg{
+        order: 1;
+    }
+
+    .Intro.reverse .Introtext{
+        order: 2;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
 
 .main{
@@ -122,13 +224,6 @@ h1{
     justify-items: center;
 }
 
-
-
-button:hover{
-    background-color: hsl(0, 0%, 10%);
-    cursor: pointer;
-}
-
 @media screen and (max-width:700px) {
     .navbar a{
     padding: 10px 20px;
@@ -153,106 +248,4 @@ button:hover{
 .contentblock:not(:first-child){
     display: none;
 }
-}
-
-#sunday{
-    color: red;
-}
-
-.primarybutton{
-    background-color: hsl(0, 0%, 20%);
-    border-radius: 10px;
-    font-size: 16px;
-    padding: 4px 8px;
-    color: white;
-    cursor: pointer;
-}
-
-.primarybutton:hover{
-    background-color: hsl(0, 0%, 10%);
-    color: lightgray;
-    box-shadow: 2px 2px 5px lightgray;
-}
-
-
-.table{
-    justify-self: left;
-    width: 100%;
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
-
-.tablecontent{
-    justify-items: center;
-}
-
-
-.store{
-   display: flex;
-   align-items: flex-start;
-   margin-top: 3vh;
-   margin-bottom: 3vh;
-}
-
-.textstore{
-    width: 50%;
-}
-
-
-.gallery{
-    display:inline-block;
-    border: 1px solid;
-    width: 50%;
-    margin-right: 16px;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-
-.gallery2{
-    display:inline-block;
-    border: 1px solid;
-    width: 50%;
-    margin-left: 16px;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.description{
-    padding: 10px;
-    text-align: center;
-
-}
-
-@media screen and (max-width:700px) {
-    .store{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .gallery,
-    .gallery2,
-    .textstore{
-        display: block;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }.store{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .gallery,
-    .gallery2,
-    .textstore{
-        display: block;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .gallery {order: 1;}
-    .textstore {order: 2;}
 }
