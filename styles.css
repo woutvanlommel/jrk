@@ -23,13 +23,96 @@ main{
     justify-self: center;
 }
 
-footer{
-    margin: 0px
+footer {
+    width: 100%;
+    background-color: red;
+    color: white;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+  }
+  
+  .footer {
+    max-width: 1100px;
+    margin: 0 auto;
+   padding: 0 50px;
+    justify-self: center;
+  }
+  
+  .footertop {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  
+  .footerlogo, .footersocial {
+    width: 50%;
+  }
+
+  .footerlogo{
+    text-align: left;
+  }
+  .footersocial{
+    text-align: right;
+  }
+
+  .footersocial h3{
+    margin-top: 0px;
+  }
+  
+  .footerbottom{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .footerbottom ul{
+    width: 100%;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footerbottom a{
+    color: white;
+    text-decoration: none;
+    display: block;
+  }
+
+.icons{
+    text-align: right;
+  }
+.icons a{
+    text-decoration: none;
+    margin-left: 2%;
+    
 }
 
-.footer{
-    padding-right: 50px;
-    padding-left: 50px;
+.fa-brands.fa-facebook.fa-2x{
+    color: hsl(0, 0%, 100%);
+}
+.fa-brands.fa-facebook.fa-2x:hover{
+    color: hsl(0, 0%, 50%);
+}
+
+.fa-brands.fa-instagram.fa-2x{
+    color: hsl(0, 0%, 100%);
+}
+.fa-brands.fa-instagram.fa-2x:hover{
+    color: hsl(0, 0%, 50%);
+}
+
+.fa-brands.fa-tiktok.fa-2x{
+    color: hsl(0, 0%, 100%);
+}
+.fa-brands.fa-tiktok.fa-2x:hover{
+    color: hsl(0, 0%, 50%);
 }
 
 h1{
@@ -94,6 +177,11 @@ h1{
     padding: 8px 16px;
     color: white;
     cursor: pointer;
+}
+
+.primarybutton a{
+    text-decoration: none;
+    color: white;
 }
 
 .primarybutton:hover{
@@ -186,23 +274,20 @@ h1{
     }
 }
 
-.main{
+.content{
     justify-content: center;
     align-content: center;
     width: 100%;
     justify-self: center;
-    margin-top: 3vh;
-    margin-bottom: 3vh;
-   
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 }
 
-.content{
-    overflow: hidden;
-    height: 100%;
-    align-content: center;
+.buttonbox{
+    justify-items: center;
 }
 
-.images{
+.activiteiten{
     display: flex;
     justify-content: space-between;
 }
@@ -218,11 +303,28 @@ h1{
 .contentblock img{
     width: 100%;
     border-radius: 10px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
 }
 
-.buttonbox{
-    justify-items: center;
+@media screen and (max-width:1000px) {
+    .activiteiten img{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .activiteiten{
+        display: flex;
+        justify-content: space-between;
+        gap: 5%;
+    }
+    .contentblock{
+        width: 50%;
+    }
+    .contentblock:last-child{
+        display: none;
+    }
 }
+
 
 @media screen and (max-width:700px) {
     .navbar a{
@@ -235,11 +337,11 @@ h1{
 .navbar.scrolled a{
     padding: 5px 15px;
 }
-.images img{
+.activiteiten img{
     width: 100%;
     margin-bottom: 10px;
 }
-.images{
+.activiteiten{
     display: block;
 }
 .contentblock{
@@ -249,3 +351,26 @@ h1{
     display: none;
 }
 }
+
+
+.hoofdleiding{
+    display: flex;
+    gap: 20%;
+    justify-content: center;
+}
+
+.persoon{
+    justify-items: center;
+    max-width: 200px;
+    flex: 1 1 200px;
+}
+
+.persoon img{
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 1rem;
+}
+
