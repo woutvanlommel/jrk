@@ -139,10 +139,10 @@ h1{
 
   
   /* Navbar */
-  .navbar {
+  .navbarjrk {
     position: sticky;
     top: 0;
-    width: 100%;
+    width: 100vw;
     height: 100px;
     background-color: hsl(0, 0%, 20%);
     z-index: 1000;
@@ -150,13 +150,13 @@ h1{
   }
   
   /* Bij scrollen: hoogte kleiner */
-  .navbar.scrolled {
+  .navbarjrk.scrolled {
     height: 60px;
     background-color: hsla(0, 0%, 40%, 0.5);
   }
   
   /* Container */
-  .navcontainer {
+  .navcontainerjrk {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 50px;
@@ -167,18 +167,18 @@ h1{
   }
   
   /* Logo links */
-  .navlogo {
+  .navlogojrk {
     height: 100%;
     display: flex;
     align-items: center;
   }
   
-  .navlogo a {
+  .navlogojrk a {
     display: block;
     height: 100%;
   }
   
-  .navlogo img {
+  .navlogojrk img {
     height: 100%;
     width: auto;
     display: block;
@@ -186,12 +186,12 @@ h1{
     filter: brightness(0) invert(1);
   }
   
-  .navbar.scrolled .navlogo img {
+  .navbarjrk.scrolled .navlogo img {
     transform: scale(0.7);
   }
   
   /* Menu rechts */
-  .navmenu {
+  .navmenujrk {
     display: flex;
     gap: 40px;
     list-style: none;
@@ -200,14 +200,14 @@ h1{
     align-items: center;
   }
   
-  .navmenu li a {
+  .navmenujrk li a {
     color: white;
     text-decoration: none;
     padding: 10px 15px;
     transition: background-color 0.3s ease, padding 0.3s ease;
   }
   
-  .navmenu li a:hover {
+  .navmenujrk li a:hover {
     background-color: hsl(0, 0%, 10%);
     border-radius: 8px;
   }
@@ -418,3 +418,88 @@ h1{
     margin: 1rem;
 }
 
+
+
+.groepen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 50px;
+    max-width: 1100px;
+    margin: auto;
+  }
+  
+  .groepblok {
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .groepblok img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .groepblok:hover img {
+    transform: scale(1.05);
+  }
+
+  .custom-modal-width {
+    max-width: 1200px;
+    width: 95%;
+  }
+
+  .custom-modal-content {
+    background-color: #e1b3b3;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .groep-beschrijving {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+  }
+
+  .leiding-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 30px;
+  }
+
+  .leiding-col {
+    flex: 1 1 250px;
+    max-width: 300px;
+  }
+
+  .leiding-foto {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+  }
+
+  .sluitknop {
+    background-color: black;
+    color: white;
+    padding: 12px 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background 0.3s ease;
+  }
+
+  .sluitknop:hover {
+    background-color: #e6007d;
+  }

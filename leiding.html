@@ -4,24 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="" href="">
+    <link rel="icon" type="image/svg" href="img/Favicon.svg">
     <title>Jeugd Rode Kruis Herckenrode</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-    <nav class="navbar">
-        <div class="navcontainer">
-            <div class="navlogo">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const navbar = document.querySelector('.navbarjrk');
+        const threshold = 50;
+    
+        window.addEventListener('scroll', function() {
+            // let op: hier gebruik je scrollY (niet scrollly!)
+            if (window.scrollY > threshold) {
+            navbar.classList.add('scrolled');
+            } else {
+            navbar.classList.remove('scrolled');
+            }
+        });
+        });
+    </script>
+
+    <nav class="navbarjrk">
+        <div class="navcontainerjrk">
+            <div class="navlogojrk">
                 <a href="index.html">
                     <img src="img/jrk_logo.svg" alt="">
                 </a>
             </div>
 
-            <ul class="navmenu">
+            <ul class="navmenujrk">
                 <li><a href="kalender.html">Kalender</a></li>
-                <li><a href="leiding.html">Leiding</a></li>
+                <li><a href="leiding.html">Groepen</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
 
@@ -31,5 +48,140 @@
    <header>
         <h1>Leiding</h1>
    </header>
+
+
+
+   <section id="groepen">
+    <div class="groepen-grid">
+  
+      <div class="groepblok" data-bs-toggle="modal" data-bs-target="#wuppiesModal">
+        <img src="img/Groepen/wuppies.jpg" alt="Wuppies">
+      </div>
+  
+      <div class="groepblok" data-bs-toggle="modal" data-bs-target="#helpertjesModal">
+        <img src="img/Groepen/helpertjes.jpg" alt="Helpertjes">
+      </div>
+  
+      <div class="groepblok" data-bs-toggle="modal" data-bs-target="#tippersModal">
+        <img src="img/Groepen/tippers.jpg" alt="Tippers">
+      </div>
+  
+      <div class="groepblok" data-bs-toggle="modal" data-bs-target="#juniorsModal">
+        <img src="img/Groepen/juniors.jpg" alt="Juniors">
+      </div>
+  
+      <div class="groepblok" data-bs-toggle="modal" data-bs-target="#plussersModal">
+        <img src="img/Groepen/plussers.jpg" alt="Plussers">
+      </div>
+  
+      <div class="groepblok" data-bs-toggle="modal" data-bs-target="#externModal">
+        <img src="img/Groepen/extern.jpg" alt="Extern">
+      </div>
+  
+    </div>
+
+      
+      <!-- ✅ Modal -->
+      <div class="modal fade" id="wuppiesModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered custom-modal-width">
+          <div class="modal-content custom-modal-content">
+            <div class="modal-header border-0">
+              <h2 class="modal-title text-uppercase mx-auto">Wuppies</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sluiten"></button>
+            </div>
+      
+            <div class="modal-body text-center">
+              <p class="groep-beschrijving">
+                De jongsten van de hoop! Met hun hoofdjes vol fantasie en benen vol energie is er bij onze wuppies altijd wel iets te beleven!<br>
+                <em>- 3e kleuterklas t.e.m. 2e leerjaar -</em>
+              </p>
+      
+              <div class="leiding-row">
+                <!-- Leider 1 -->
+                <div class="leiding-col">
+                  <img src="img/Foto's leiding/Luca Fresca.jpg" alt="Luca" class="leiding-foto">
+                  <p>
+                    <strong>Verjaardag:</strong> 28-12-1999<br>
+                    <strong>Telefoonnummer:</strong> 0492/31 45 81<br>
+                    <strong>Favoriete activiteit:</strong> Driedaagse
+                  </p>
+                </div>
+      
+                <!-- Leider 2 -->
+                <div class="leiding-col">
+                  <img src="assets/img/leiding/bram.jpg" alt="Bram" class="leiding-foto">
+                  <p>
+                    <strong>Verjaardag:</strong> 22-02-2001<br>
+                    <strong>Telefoonnummer:</strong> 0474/07 48 86<br>
+                    <strong>Favoriete activiteit:</strong> Ledenweekend
+                  </p>
+                </div>
+              </div>
+            </div>
+      
+            <div class="modal-footer justify-content-center border-0">
+              <button class="sluitknop" data-bs-dismiss="modal">
+                ✖ Sluit venster
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+        <!-- ✅ Modal -->
+        <div class="modal fade" id="helpertjesModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered custom-modal-width">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header border-0">
+                <h2 class="modal-title text-uppercase mx-auto">Wuppies</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sluiten"></button>
+                </div>
+        
+                <div class="modal-body text-center">
+                <p class="groep-beschrijving">
+                    De jongsten van de hoop! Met hun hoofdjes vol fantasie en benen vol energie is er bij onze wuppies altijd wel iets te beleven!<br>
+                    <em>- 3e kleuterklas t.e.m. 2e leerjaar -</em>
+                </p>
+        
+                <div class="leiding-row">
+                    <!-- Leider 1 -->
+                    <div class="leiding-col">
+                    <img src="assets/img/leiding/anna.jpg" alt="Anna" class="leiding-foto">
+                    <p>
+                        <strong>Verjaardag:</strong> 28-12-1999<br>
+                        <strong>Telefoonnummer:</strong> 0492/31 45 81<br>
+                        <strong>Favoriete activiteit:</strong> Driedaagse
+                    </p>
+                    </div>
+        
+                    <!-- Leider 2 -->
+                    <div class="leiding-col">
+                    <img src="assets/img/leiding/bram.jpg" alt="Bram" class="leiding-foto">
+                    <p>
+                        <strong>Verjaardag:</strong> 22-02-2001<br>
+                        <strong>Telefoonnummer:</strong> 0474/07 48 86<br>
+                        <strong>Favoriete activiteit:</strong> Ledenweekend
+                    </p>
+                    </div>
+                </div>
+                </div>
+        
+                <div class="modal-footer justify-content-center border-0">
+                <button class="sluitknop" data-bs-dismiss="modal">
+                    ✖ Sluit venster
+                </button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    
+      
+  </section>
+  
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
