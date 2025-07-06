@@ -219,8 +219,10 @@ h1{
     border: 0;
     font-size: 16px;
     padding: 8px 16px;
+    margin: 0,5rem auto 0 auto;
     color: white;
     cursor: pointer;
+    display: inline-block;
 }
 
 .primarybutton a{
@@ -404,7 +406,10 @@ h1{
 }
 
 .persoon{
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     max-width: 150px;
     flex: 1 1 150px;
 }
@@ -417,7 +422,6 @@ h1{
     display: block;
     margin: 1rem;
 }
-
 
 
 .groepen-grid {
