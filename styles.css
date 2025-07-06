@@ -459,7 +459,7 @@ h1{
   }
 
   .custom-modal-content {
-    background-color: #e1b3b3;
+    background-color: #f0f0f0;
     padding: 40px;
     border-radius: 12px;
     text-align: center;
@@ -476,6 +476,10 @@ h1{
     justify-content: center;
     gap: 60px;
     margin-bottom: 30px;
+  }
+
+  .leiding-row h4{
+    font-weight: bold;
   }
 
   .leiding-col {
@@ -505,5 +509,5 @@ h1{
   }
 
   .sluitknop:hover {
-    background-color: #e6007d;
+    background-color: red;
   }
