@@ -4,23 +4,28 @@ body{
     margin: 0px
 }
 
-header{
-    color: white;
-    background-image: url(img/Groepsfotobewerkt.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    background-size: cover;
-  
-    height: 90vh;
-    margin: 0;
-  
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
+header {
+  color: white;
+  background-image: url(img/Groepsfotobewerkt.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 90vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+header h1 {
+  font-size: clamp(1rem, 5vw, 2.5rem);
+  margin: 0;
 }
 
 main{
@@ -214,11 +219,11 @@ h1{
   
 
 .primarybutton{
+    font-size: clamp(0.6rem, 2vw, 1rem);
+    padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.8rem, 2vw, 1rem);
     background-color: hsl(0, 100%, 50%);
     border-radius: 10px;
     border: 0;
-    font-size: 16px;
-    padding: 8px 16px;
     margin: 0,5rem auto 0 auto;
     color: white;
     cursor: pointer;
