@@ -372,12 +372,14 @@ h1{
     justify-content: space-between;
 }
 
+
 .contentblock{
     width: 30%;
     background-color: hsl(0, 0%, 95%);
     padding: 10px;
     border: 1px solid hsl(0, 0%, 80%);
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .contentblock img{
@@ -385,6 +387,10 @@ h1{
     border-radius: 10px;
     aspect-ratio: 16/9;
     object-fit: cover;
+}
+
+.contentblock:hover{
+  box-shadow: 1px 1px 5px grey
 }
 
 @media screen and (max-width:1000px) {
