@@ -635,17 +635,7 @@ h1{
     color: white;
   }
 
-  .activity {
-    font-size: 0.75rem;
-    background: hsl(0, 100%, 45%);
-    color: white;
-    padding: 3px 5px;
-    border-radius: 3px;
-    margin-top: 5px;
-    width: 100%;
-    text-align: left;
-    word-break: break-word;
-  }
+
 
   #todayBtn {
     margin: 20px auto 30px;
@@ -669,21 +659,21 @@ h1{
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     text-align: right;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: flex-end;
   }
 
   .month-popup select,
   .month-popup input {
     padding: 5px;
     font-size: 1rem;
-    margin: 5px;
+    margin: 5px; 
   }
 
   .month-popup button {
     margin-top: 10px;
     padding: 8px 15px;
-    background: #312783;
+    background: hsl(0, 100%, 45%);
     color: white;
     border: none;
     border-radius: 5px;
