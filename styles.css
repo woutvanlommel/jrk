@@ -582,10 +582,16 @@ h1{
   }
 
   .calendar-header button {
-    background: none;
+    background: lightgray;
+    color: white;
     border: none;
-    font-size: 2rem;
+    border-radius: 5px;
+    font-size: 1.5rem;
     cursor: pointer;
+  }
+
+  .calendar-header button:hover{
+    background-color: hsl(0, 100%, 35%);
   }
 
   .calendar-weekdays,
@@ -611,7 +617,8 @@ h1{
     background: #f2f2f2;
     border-radius: 6px;
     padding: 10px;
-    min-height: 120px;
+    min-height: 100px;
+    height: 20vh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
