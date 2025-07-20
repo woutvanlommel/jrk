@@ -714,13 +714,18 @@ h1{
     margin: 0.5rem 0;
   }
 
-  #buttonSluiten{
+  #button{
     padding: 4px 10px;
     background-color: hsl(0, 100%, 45%);
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+  }
+
+  #button:hover{
+    box-shadow: 1px 1px #CCC;
+    background-color: hsl(0, 100%, 60%);
   }
   
   .hidden {
