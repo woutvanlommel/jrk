@@ -172,156 +172,179 @@ h1{
 
 
   
-  /* Navbar */
-  .navbarjrk {
-    position: sticky;
-    top: 0;
-    width: 100vw;
-    height: 100px;
-    background-color: hsl(0, 0%, 20%);
-    z-index: 1000;
-    transition: all 0.3s ease;
-  }
-  
-  /* Bij scrollen: hoogte kleiner */
-  .navbarjrk.scrolled {
-    height: 60px;
-    background-color: hsla(0, 0%, 40%, 0.5);
-  }
-  
-  /* Container */
-  .navcontainerjrk {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 50px;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  /* Logo links */
-  .navlogojrk {
-    height: 90%;
-    display: flex;
-    align-items: center;
-  }
-  
-  .navlogojrk a {
-    display: block;
-    height: 100%;
-  }
-  
-  .navlogojrk img {
-    height: 100%;
-    width: auto;
-    display: block;
-    transition: transform 0.3s ease;
-    filter: brightness(0) invert(1);
-  }
-  
-  .navbarjrk.scrolled .navlogo img {
-    transform: scale(0.7);
-  }
-  
-  /* Menu rechts */
-  .navmenujrk {
-    font-family: 'poppins';
-    display: flex;
-    gap: 30px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    align-items: center;
-  }
-  
-  .navmenujrk li a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    transition: background-color 0.3s ease, padding 0.3s ease;
-  }
-  
-  .navmenujrk li a:hover {
-    background-color: hsl(0, 0%, 10%);
-    color: red;
-    border-radius: 8px;
-  }
+ /* Navbar */
+.navbarjrk {
+  position: relative;
+  top: 0;
+  width: 100vw;
+  height: 80px;
+  background-color: hsla(0, 0%, 100%, 0.6);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
 
-  /* Hamburger standaard verbergen */
+/* Bij scrollen: hoogte kleiner */
+.navbarjrk.scrolled {
+  position: sticky;
+  height: 60px;
+  background-color: hsla(0, 0%, 40%, 0.6);
+}
+
+/* Container */
+.navcontainerjrk {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 50px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.navlogojrk {
+  height: 90%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1002;
+}
+
+.navlogojrk a {
+  display: block;
+  height: 100%;
+}
+
+.navlogojrk img {
+  height: 100%;
+  width: auto;
+  display: block;
+  filter: none;
+}
+
+/* Scrolled = wit logo */
+.navbarjrk.scrolled .navlogojrk img {
+  filter: brightness(0) invert(1);
+}
+
+/* Menu */
+.navmenujrk {
+  font-family: 'poppins';
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.navmenujrk li a {
+  color: black;
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease, padding 0.3s ease, color 0.3s ease;
+}
+
+.navbarjrk.scrolled .navmenujrk li a {
+  color: white;
+}
+
+.navmenujrk li a:hover {
+  background-color: hsl(0, 0%, 10%);
+  color: red;
+  border-radius: 8px;
+}
+
+/* Hamburger standaard verbergen */
 .hamburger {
   display: none;
   font-size: 2rem;
-  color: white;
+  color: black;
   cursor: pointer;
+  transition: color 0.3s ease;
+  z-index: 1002;
+  position: relative;
 }
 
-
-  @media screen and (max-width: 1000px){
-    .hamburger {
-      display: block;
-      z-index: 1001; /* bovenop menu */
-    }
-
-    .navmenujrk {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 100vw;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      background-color: hsl(0, 0%, 20%);
-      padding: 7.5rem 0; /* bovenruimte voor navbar + padding links */
-      gap: 20px;
-      z-index: 999;
-    }
-  
-    .navmenujrk.show {
-      display: block;
-      padding: 7.5rem 4rem
-    }
-    
-    .navmenujrk li a {
-      font-size: 1.5rem;
-      padding: 10px 0px;
-      text-align: left;
-      border-bottom: 1px solid #CCC;
-      display: block;
-      width: 100%;
-    }
-
-    .navmenujrk li a:hover {
-      background-color: hsl(0, 0%, 10%);
-      color: red;
-      border-radius: 0px;
-    }
-  
-    .hamburger {
-      display: block;
-      font-size: 1.8rem;
-      color: white;
-      cursor: pointer;
-      z-index: 1002;
-      position: relative;
-    }
-  
-    .navcontainerjrk {
-      justify-content: space-between;
-      z-index: 1001;
-      position: relative;
-    }
-
-    .navlogojrk{
-      z-index: 1002;
-      position: relative;
-      height: 90%;
-    }
-
+/* MOBIEL */
+@media screen and (max-width: 1000px) {
+  .hamburger {
+    display: block;
   }
 
+  .navmenujrk {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: hsl(0, 0%, 20%);
+    padding: 7.5rem 0;
+    gap: 20px;
+    z-index: 999;
+  }
+
+  .navmenujrk.show {
+    display: block;
+    padding: 7.5rem 4rem;
+  }
+
+  .navmenujrk li a {
+    font-size: 1.5rem;
+    color: white;
+    padding: 10px 0px;
+    text-align: left;
+    border-bottom: 1px solid #CCC;
+    display: block;
+    width: 100%;
+  }
+
+  .navmenujrk li a:hover {
+    background-color: hsl(0, 0%, 10%);
+    color: red;
+    border-radius: 0px;
+  }
+
+  /* LOGO en hamburger zwart standaard op mobiel */
+  .navbarjrk .navlogojrk img {
+    filter: none;
+  }
+
+  .navbarjrk .hamburger {
+    color: black;
+  }
+
+  /* Bij scrollen: logo en hamburger wit */
+  .navbarjrk.scrolled .navlogojrk img {
+    filter: brightness(0) invert(1);
+  }
+
+  .navbarjrk.scrolled .hamburger {
+    color: white;
+  }
+
+  /* Bij open menu: logo en sluiticoon wit */
+  body.menu-open .navlogojrk img {
+    filter: brightness(0) invert(1);
+  }
+
+  body.menu-open .hamburger {
+    color: white;
+  }
+
+  /* Overschrijving: als niet gescrolled en niet open → zwart logo/icon */
+  body:not(.menu-open) .navbarjrk:not(.scrolled) .navlogojrk img {
+    filter: none;
+  }
+  
+  body:not(.menu-open) .navbarjrk:not(.scrolled) .hamburger {
+    color: black;
+  }
+}
   
 
 .primarybutton{

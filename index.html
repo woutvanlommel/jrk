@@ -28,31 +28,35 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const hamburger = document.getElementById("hamburger");
-      const navMenu = document.querySelector(".navmenujrk");
-      const icon = hamburger.querySelector("i");
-  
-      hamburger.addEventListener("click", function () {
-        navMenu.classList.toggle("show");
-        document.body.style.overflow = navMenu.classList.contains("show") ? "hidden" : "auto";
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.querySelector(".navmenujrk");
+    const icon = hamburger.querySelector("i");
 
-        if (navMenu.classList.contains("show")){
-            icon.classList.remove("fa-bars");
-            icon.classList.add("fa-times");
+    hamburger.addEventListener("click", function () {
+        navMenu.classList.toggle("show");
+
+        const isOpen = navMenu.classList.contains("show");
+        document.body.style.overflow = isOpen ? "hidden" : "auto";
+
+        if (isOpen) {
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-times");
+        document.body.classList.add("menu-open"); // ➕ voeg class toe
+        } else {
+        icon.classList.add("fa-bars");
+        icon.classList.remove("fa-times");
+        document.body.classList.remove("menu-open"); // ➖ verwijder class
         }
-        else {
-            icon.classList.add("fa-bars");
-            icon.classList.remove("fa-times");
-        }
-      });
-      
-      document.querySelectorAll(".navmenujrk a").forEach(link => {
-      link.addEventListener("click", () => {
+    });
+
+    document.querySelectorAll(".navmenujrk a").forEach(link => {
+        link.addEventListener("click", () => {
         navMenu.classList.remove("show");
         icon.classList.remove("fa-times");
         icon.classList.add("fa-bars");
         document.body.style.overflow = "auto";
-      });
+        document.body.classList.remove("menu-open"); // ➖ ook bij sluiten via link
+        });
     });
     });
   </script>

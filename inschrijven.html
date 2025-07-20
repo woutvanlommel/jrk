@@ -32,28 +32,26 @@
       const navMenu = document.querySelector(".navmenujrk");
       const icon = hamburger.querySelector("i");
   
+      // Toggle menu openen/sluiten
       hamburger.addEventListener("click", function () {
-        navMenu.classList.toggle("show");
-        document.body.style.overflow = navMenu.classList.contains("show") ? "hidden" : "auto";
-
-        if (navMenu.classList.contains("show")){
-            icon.classList.remove("fa-bars");
-            icon.classList.add("fa-times");
-        }
-        else {
-            icon.classList.add("fa-bars");
-            icon.classList.remove("fa-times");
-        }
+        const isOpen = navMenu.classList.toggle("show");
+        document.body.style.overflow = isOpen ? "hidden" : "auto";
+        document.body.classList.toggle("menu-open", isOpen); // ← dit is toegevoegd
+  
+        icon.classList.toggle("fa-bars", !isOpen);
+        icon.classList.toggle("fa-times", isOpen);
       });
-      
+  
+      // Sluit menu bij klikken op een link
       document.querySelectorAll(".navmenujrk a").forEach(link => {
-      link.addEventListener("click", () => {
-        navMenu.classList.remove("show");
-        icon.classList.remove("fa-times");
-        icon.classList.add("fa-bars");
-        document.body.style.overflow = "auto";
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("show");
+          document.body.classList.remove("menu-open"); // ← ook hier toegevoegd
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+          document.body.style.overflow = "auto";
+        });
       });
-    });
     });
   </script>
 
