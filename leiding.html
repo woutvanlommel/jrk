@@ -11,23 +11,54 @@
     <script src="https://kit.fontawesome.com/ef4e3e0cf6.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const navbar = document.querySelector('.navbarjrk');
+    const threshold = 50;
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        const navbar = document.querySelector('.navbarjrk');
-        const threshold = 50;
+    window.addEventListener('scroll', function() {
+      // let op: hier gebruik je scrollY (niet scrollly!)
+      if (window.scrollY > threshold) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.querySelector(".navmenujrk");
+    const icon = hamburger.querySelector("i");
+
+    hamburger.addEventListener("click", function () {
+      navMenu.classList.toggle("show");
+      document.body.style.overflow = navMenu.classList.contains("show") ? "hidden" : "auto";
+
+      if (navMenu.classList.contains("show")){
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-times");
+      }
+      else {
+          icon.classList.add("fa-bars");
+          icon.classList.remove("fa-times");
+      }
+    });
     
-        window.addEventListener('scroll', function() {
-            // let op: hier gebruik je scrollY (niet scrollly!)
-            if (window.scrollY > threshold) {
-            navbar.classList.add('scrolled');
-            } else {
-            navbar.classList.remove('scrolled');
-            }
-        });
-        });
-    </script>
+    document.querySelectorAll(".navmenujrk a").forEach(link => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("show");
+      icon.classList.remove("fa-times");
+      icon.classList.add("fa-bars");
+      document.body.style.overflow = "auto";
+    });
+  });
+  });
+</script>
+
+<body>
 
 <nav class="navbarjrk">
   <div class="navcontainerjrk">
@@ -39,9 +70,14 @@
 
       <ul class="navmenujrk">
           <li><a href="kalender.html">Kalender</a></li>
-          <li><a href="leiding.html">Groepen</a></li>
+          <li><a href="leiding.html"  style="color: red;">Groepen</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="inschrijven.html">Inschrijvingen</a></li>
       </ul>
+
+      <div class="hamburger" id="hamburger">
+        <i class="fas fa-bars"></i>
+    </div>
 
   </div> 
 </nav>
