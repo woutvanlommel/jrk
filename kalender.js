@@ -164,32 +164,34 @@ const renderCalendar = async () => {
       activity.style.borderRadius = "4px";
       activity.style.fontSize = "0.8rem";
 
-      if (i === rangeStart) {
-        activity.addEventListener("click", (e) => {
-          e.stopPropagation();
-
-          if (startStr === endStr) {
-            eventTitle.textContent = `${eventTitleText} van ${startStr}`;
-          } else {
-            eventTitle.textContent = `${eventTitleText}`;
-          }
-
-          if (ev.start?.dateTime) {
-            eventTime.textContent = `🕒 ${start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-          } else if (startStr !== endStr) {
-            eventTime.textContent = `⏳ Van ${startStr} tot ${endStr}`;
-          } else {
-            eventTime.textContent = "⏳ Hele dag";
-          }
-
-          eventLocation.textContent = `📍 ${ev.location || "Geen locatie"}`;
-          eventDescription.textContent = `🗒️ ${ev.description || "Geen beschrijving"}`;
-
-          modal.classList.remove("hidden");
-          modalOverlay.classList.remove("hidden");
-        });
-      }
-
+      activity.addEventListener("click", (e) => {
+        e.stopPropagation();
+      
+        const eventTitleText = ev.summary || "Activiteit";
+        const startStr = `${start.getDate()} ${monthNames[start.getMonth()]} ${start.getFullYear()}`;
+        const endStr = `${end.getDate()} ${monthNames[end.getMonth()]} ${end.getFullYear()}`;
+      
+        if (startStr === endStr) {
+          eventTitle.textContent = `${eventTitleText} van ${startStr}`;
+        } else {
+          eventTitle.textContent = `${eventTitleText}`;
+        }
+      
+        if (ev.start?.dateTime) {
+          eventTime.textContent = `🕒 ${start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+        } else if (startStr !== endStr) {
+          eventTime.textContent = `⏳ Van ${startStr} tot ${endStr}`;
+        } else {
+          eventTime.textContent = "⏳ Hele dag";
+        }
+      
+        eventLocation.textContent = `📍 ${ev.location || "Geen locatie"}`;
+        eventDescription.textContent = `🗒️ ${ev.description || "Geen beschrijving"}`;
+      
+        modal.classList.remove("hidden");
+        modalOverlay.classList.remove("hidden");
+      });
+      
       dayEl.appendChild(activity);
     }
   });
