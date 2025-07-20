@@ -202,7 +202,7 @@ h1{
   
   /* Logo links */
   .navlogojrk {
-    height: 100%;
+    height: 90%;
     display: flex;
     align-items: center;
   }
@@ -228,7 +228,7 @@ h1{
   .navmenujrk {
     font-family: 'poppins';
     display: flex;
-    gap: 40px;
+    gap: 30px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -257,7 +257,7 @@ h1{
 }
 
 
-  @media screen and (max-width: 700px){
+  @media screen and (max-width: 1000px){
     .hamburger {
       display: block;
       z-index: 1001; /* bovenop menu */
@@ -274,25 +274,34 @@ h1{
       align-items: flex-start;
       justify-content: flex-start;
       background-color: hsl(0, 0%, 20%);
-      padding: 100px 1.5rem 0; /* bovenruimte voor navbar + padding links */
+      padding: 7.5rem 0; /* bovenruimte voor navbar + padding links */
       gap: 20px;
       z-index: 999;
     }
   
     .navmenujrk.show {
-      display: flex;
+      display: block;
+      padding: 7.5rem 4rem
     }
-  
+    
     .navmenujrk li a {
-      font-size: 2rem;
-      padding: 10px 50px;
-      width: 100%;
+      font-size: 1.5rem;
+      padding: 10px 0px;
       text-align: left;
+      border-bottom: 1px solid #CCC;
+      display: block;
+      width: 100%;
+    }
+
+    .navmenujrk li a:hover {
+      background-color: hsl(0, 0%, 10%);
+      color: red;
+      border-radius: 0px;
     }
   
     .hamburger {
       display: block;
-      font-size: 28px;
+      font-size: 1.8rem;
       color: white;
       cursor: pointer;
       z-index: 1002;
@@ -308,7 +317,7 @@ h1{
     .navlogojrk{
       z-index: 1002;
       position: relative;
-      height: 5rem;
+      height: 90%;
     }
 
   }
