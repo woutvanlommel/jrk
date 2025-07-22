@@ -101,18 +101,20 @@ const renderCalendar = async () => {
 
   for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
     const date = new Date(year, month, i);
+    const isoDatum = date.toISOString().split("T")[0]; // "2025-07-22"
     const dayDiv = document.createElement("div");
     dayDiv.className = "day";
-
+    dayDiv.setAttribute("data-datum", isoDatum); // ✅
+  
     const dateLabel = document.createElement("span");
     dateLabel.className = "date-number";
     dateLabel.textContent = i;
     dayDiv.appendChild(dateLabel);
-
+  
     if (today.toDateString() === date.toDateString()) {
       dayDiv.classList.add("today");
     }
-
+  
     calendarDays.appendChild(dayDiv);
   }
 
@@ -148,9 +150,10 @@ const renderCalendar = async () => {
     const rangeStart = start < currentMonthStart ? 1 : start.getDate();
     const rangeEnd = end > currentMonthEnd ? lastDayOfMonth.getDate() : end.getDate();
 
-    for (let i = rangeStart; i <= rangeEnd; i++) {
-      const offsetIndex = (startWeekDay + i - 1);
-      const dayEl = days[offsetIndex];
+    for (let d = rangeStart; d <= rangeEnd; d++) {
+      const eventDate = new Date(year, month, d);
+      const iso = eventDate.toISOString().split("T")[0];
+      const dayEl = document.querySelector(`[data-datum="${iso}"]`);
       if (!dayEl) continue;
 
       const activity = document.createElement("div");
@@ -242,6 +245,15 @@ goToDateBtn.addEventListener("click", () => {
 function closeEventModal() {
   modal.classList.add("hidden");
   modalOverlay.classList.add("hidden");
+
+  // Verwijder highlight van geselecteerde dag
+  const highlighted = document.querySelector(".highlight");
+  if (highlighted) highlighted.classList.remove("highlight");
+
+  // Verwijder ?datum=... uit de URL zonder te herladen
+  const url = new URL(window.location);
+  url.searchParams.delete("datum");
+  window.history.replaceState({}, document.title, url.pathname);
 }
 
 document.getElementById("eventModal").querySelector("button").addEventListener("click", closeEventModal);
@@ -253,12 +265,49 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+
+function scrollNaarDatum(datum) {
+  // Controleer of datum een all-day event is dat op vorige dag eindigde
+  const geselecteerde = new Date(datum);
+  const vandaag = new Date();
+  
+  // Kalender rendert activiteiten op de correcte dag (zonder -1 offset), dus wij moeten +1 doen als nodig
+  // In dit geval doen we altijd +1 want de meeste issues zijn met all-day events met end = volgende dag
+  const datumPlus1 = new Date(geselecteerde.getTime() - 1);
+  const iso = datumPlus1.toISOString().split("T")[0];
+
+  const dayEl = document.querySelector(`[data-datum="${iso}"]`) || document.querySelector(`[data-datum="${datum}"]`);
+  if (!dayEl) return;
+
+  dayEl.scrollIntoView({ behavior: "smooth", block: "center" });
+  dayEl.classList.add("highlight");
+
+  const firstActivity = dayEl.querySelector(".activity-range");
+  if (firstActivity) {
+    firstActivity.click();
+  }
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const geselecteerdeDatum = params.get("datum");
+
+  if (geselecteerdeDatum) {
+    const datumParts = geselecteerdeDatum.split("-");
+    if (datumParts.length === 3) {
+      const jaar = parseInt(datumParts[0]);
+      const maand = parseInt(datumParts[1]) - 1;
+      currentDate = new Date(jaar, maand, 1); // ✅ MOET VÓÓR renderCalendar()
+    }
+  }
+
   renderCalendar().then(() => {
     document.getElementById("calendarWrapper").style.display = "block";
     document.getElementById("loading").style.display = "none";
-  }).catch((error) => {
-    console.error("Fout bij laden van de kalender:", error);
-    document.getElementById("loading").textContent = "Er is een fout opgetreden bij het laden van de kalender.";
+
+    if (geselecteerdeDatum) {
+      scrollNaarDatum(geselecteerdeDatum); // opent nu ook automatisch de modal!
+    }
   });
 });

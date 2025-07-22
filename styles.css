@@ -1,24 +1,47 @@
 *{box-sizing: border-box;}
 
-body{
-    margin: 0px
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 h1{
   font-family: 'poppins';
   font-weight: 700;
+  text-align: center;
+}
+
+.primarybutton{
+  font-size: clamp(0.6rem, 3vw, 1rem);
+  padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.8rem, 2vw, 1rem);
+  background-color: hsl(0, 100%, 50%);
+  border-radius: 10px;
+  border: 0;
+  margin: 0,5rem auto 0 auto;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.primarybutton a{
+  text-decoration: none;
+  color: white;
+}
+
+.primarybutton:hover{
+  background-color: hsl(0, 100%, 45%);
+  color: white;
+  box-shadow: 1px 1px 5px grey
 }
 
 header {
   color: white;
-  background-image: url(img/Groepsfotobewerkt.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-color: rgb(255, 69, 69);
 
   width: 100%;
-  aspect-ratio: 16 / 9;
-  max-height: 50vh;
+  aspect-ratio: 16/9;
+  max-height: 20vh;
 
   display: flex;
   flex-direction: column;
@@ -54,11 +77,12 @@ header h1 {
 
 main{
     margin: 0px auto;
-    padding: 0px 50px;
+    padding: 0px 5vw;
     max-width: 1100px;
     justify-self: center;
 }
 
+/* Footer */
 footer {
     width: 100%;
     background-color: red;
@@ -134,6 +158,7 @@ footer {
     display: block;
   }
 
+/* Logo's en icons */
 .icons{
     text-align: right;
   }
@@ -166,9 +191,6 @@ footer {
     color: hsl(0, 0%, 50%);
 }
 
-h1{
-    text-align: center; 
-}
 
 
   
@@ -345,223 +367,158 @@ h1{
     color: black;
   }
 }
-  
 
-.primarybutton{
-    font-size: clamp(0.6rem, 3vw, 1rem);
-    padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.8rem, 2vw, 1rem);
-    background-color: hsl(0, 100%, 50%);
-    border-radius: 10px;
-    border: 0;
-    margin: 0,5rem auto 0 auto;
-    color: white;
-    cursor: pointer;
-    display: inline-block;
+
+/* JRK met wisselwoord */
+.wisselwoordcontent{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2vw;
+  margin: 4rem 0px;
 }
 
-.primarybutton a{
-    text-decoration: none;
-    color: white;
+.jrkwisselwoord, .jrkwisselwoordtxt{
+  width: 50%;
 }
 
-.primarybutton:hover{
-    background-color: hsl(0, 100%, 45%);
-    color: white;
-    box-shadow: 1px 1px 5px grey
+.jrkwisselwoord h2{
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin: 0px;
 }
 
-
-
-.Intro{
-    display: flex;
-    align-items: flex-start;
-    margin: 10vh 0;
+.jrkwisselwoordtxt p{
+  font-size: clamp(0.8, 2vw, 1rem);
+  margin: 0px;
 }
 
-.Intro.reverse{
-    flex-direction: row-reverse;
+.jrkwisselwoord .wisselwoord{
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: #e60000;
+  font-weight: bold;
+  transition: opacity 0.3s ease;
+  display: inline-block;
 }
 
-.Introimg, .Introtext{
-    width: 50%;
+/* Sectie over jrk */
+.introjrk{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 4rem 0px;
+  gap: 3rem;
 }
 
-.Introtext{
-    padding: 2rem;
-    padding-top: 0px;
-    padding-right: 0px;
+.uitlegjrk{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2vw;
 }
 
-.Intro.reverse .Introtext{
-    padding-left: 0px;
+.uitlegjrk.reverse{
+  flex-direction: row-reverse;
 }
 
-.Introimg img{
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 15px;
-    aspect-ratio: 16/9;
+.uitlegimg, .uitlegtxt{
+  width: 50%;
 }
 
-@media screen and (max-width:700px) {
-    .Intro{
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-        margin: 0px;
-        margin-top: 2rem;
-        padding: 0px;
-        gap: 1rem;
-    }
-
-    .Intro h3{
-        padding-top: 0px;
-        margin-top: 0px;
-    }
-    .Introtext{
-        width: 100%;
-        height: auto;
-        padding: 0px;
-    }
-    
-    .Introimg{
-        width: 100%;
-        height: auto;
-        aspect-ratio: 16/9;
-        padding: 0px;
-    }
-
-    .Introtext{
-        padding-left: 1rem;
-        padding-right: 1rem;
-        padding-bottom: 0px;
-        margin: 0px;
-    }
-
-    .Intro.reverse{
-        flex-direction: column;
-    }
-
-    .Intro.reverse .Introimg{
-        order: 1;
-    }
-
-    .Intro.reverse .Introtext{
-        order: 2;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
+.uitlegimg img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  aspect-ratio: 16/9;
 }
 
-.content{
-    justify-content: center;
-    align-content: center;
-    width: 100%;
-    justify-self: center;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+.uitlegtxt{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.buttonbox{
-    justify-items: center;
+.uitlegtxt h3, p{
+  font-size: clamp(0.5rem, 2vw, 1rem);
 }
 
-.activiteiten{
-    display: flex;
-    justify-content: space-between;
+.uitlegtxt p{
+  font-weight: lighter;
 }
 
 
-.contentblock{
-    width: 30%;
-    background-color: hsl(0, 0%, 95%);
-    padding: 10px;
-    border: 1px solid hsl(0, 0%, 80%);
-    border-radius: 20px;
-    cursor: pointer;
+/* Automatische sectie speciale activiteien */
+
+#speciale-activiteiten {
+  text-align: left;
+  margin: 4rem 0px;
 }
 
-.contentblock img{
-    width: 100%;
-    border-radius: 10px;
-    aspect-ratio: 16/9;
-    object-fit: cover;
+#speciale-activiteiten-container {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1rem;
 }
 
-.contentblock:hover{
-  box-shadow: 1px 1px 5px grey
+.activiteitkaart {
+  background: #f2f2f1;
+  padding: 1rem;
+  border-radius: 5px;
+  flex: 1 1 30%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease;
 }
 
-@media screen and (max-width:1000px) {
-    .activiteiten img{
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    .activiteiten{
-        display: flex;
-        justify-content: space-between;
-        gap: 5%;
-    }
-    .contentblock{
-        width: 50%;
-    }
-    .contentblock:last-child{
-        display: none;
-    }
+.activiteitkaart:hover{
+  transform: scale(1.02);
+  cursor: pointer;
 }
 
-
-@media screen and (max-width:700px) {
-    .navbar a{
-    padding: 10px 20px;
-}
-.navbar.scrolled{
-    background-color: hsla(0, 0%, 40%, 0.5);  /* lichter grijs */
-    padding: 0px 0;  
-}
-.navbar.scrolled a{
-    padding: 5px 15px;
-}
-.activiteiten img{
-    width: 100%;
-    margin-bottom: 10px;
-}
-.activiteiten{
-    display: block;
-}
-.contentblock{
-    width: 100%;
-}
-.contentblock:not(:first-child){
-    display: none;
-}
+.activiteitkaart h4 {
+  color: red;
+  margin-bottom: 0.5rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
 }
 
-
-.hoofdleiding{
-    display: flex;
-    gap: 20%;
-    justify-content: center;
+.activiteitkaart p {
+  margin: 0.5rem 0;
+  font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
-.persoon{
-    display: flex;
+.activiteitkaart em{
+  color: #666;
+  font-style: italic;
+  font-size: clamp(0.6rem, 2vw, 0.8rem);
+}
+
+.highlight {
+  outline: 1px solid red;
+  box-shadow: 2px 2px 10px #ccc;
+  border-radius: 6px;
+}
+
+@media (max-width: 900px) {
+  #speciale-activiteiten-container {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    max-width: 150px;
-    flex: 1 1 150px;
+    align-items: stretch;
+  }
+
+  .activiteitkaart {
+    max-width: 100%;
+  }
 }
 
-.persoon img{
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    border-radius: 50%;
-    display: block;
-    margin: 1rem;
-}
+
+/* Hoofdleiding */
+
+
 
 
 .groepen-grid {
@@ -676,7 +633,7 @@ h1{
     align-items: center;
     font-weight: bold;
     font-size: 1.6rem;
-    gap: 50px;
+    gap: 5vw;
     margin-bottom: 32px;
     cursor: pointer;
   }
@@ -685,7 +642,7 @@ h1{
     background: lightgray;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     font-size: 1.5rem;
     cursor: pointer;
   }
@@ -856,8 +813,8 @@ h1{
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      grid-auto-rows: 12vw; /* zorgt voor vierkante daghokken */
-      gap: 5px;
+      grid-auto-rows: 11vw; /* zorgt voor vierkante daghokken */
+      gap: 0.5vw;
       margin-bottom: 1rem;
     }
   
