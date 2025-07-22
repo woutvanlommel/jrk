@@ -679,255 +679,384 @@ footer {
     background-color: red;
   }
 
+  /* === Groepen Grid === */
+.groepen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  justify-items: center;
+}
 
-  .calendar {
-    max-width: 1200px;
-    width: 100%;
-    margin: 40px auto;
-    font-size: 1rem;
-  }
+/* Groep-blok */
+.groep {
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 1 / 1;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  background-color: #ccc;
+  background-size: cover;
+  background-position: center;
+}
 
-  .calendar-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: 1.6rem;
-    gap: 5vw;
-    margin-bottom: 32px;
-    cursor: pointer;
-  }
+.groep:hover {
+  transform: scale(1.03);
+}
 
-  .calendar-header button {
-    background: lightgray;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
+.groep-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  text-align: center;
+}
 
-  .calendar-header button:hover{
-    background-color: hsl(0, 100%, 35%);
-  }
+.groep-overlay h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
 
-  .calendar-weekdays,
+.groep-overlay p {
+  margin: 0.5rem 0 0 0;
+}
+
+/* === Modal === */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 900px;
+  position: relative;
+}
+
+.modal-content h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.modal-content-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.leidingkaart {
+  background-color: #f5f5f5;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.leidingkaart img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.leidinginfo a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+}
+
+.leidinginfo p {
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+}
+
+.close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #555;
+}
+
+.close-modal:hover {
+  color: #000;
+}
+
+
+
+/* Kalender */
+.calendar {
+  max-width: 1200px;
+  width: 100%;
+  margin: 40px auto;
+  font-size: 1rem;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.6rem;
+  gap: 5vw;
+  margin-bottom: 32px;
+  cursor: pointer;
+}
+
+.calendar-header button {
+  background: lightgray;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.calendar-header button:hover{
+  background-color: hsl(0, 100%, 35%);
+}
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  gap: 5px;
+}
+
+.calendar-grid{
+  grid-auto-rows: 12vw;
+}
+#calendarDays{
+  min-width: 15%;
+}
+
+.calendar-weekdays {
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.calendar-grid .day {
+  background: #f2f2f2;
+  border-radius: 6px;
+  padding: 10px;
+  min-height: unset;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 1rem;
+  box-shadow: 0 0 3px rgba(0,0,0,0.1);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.activity-range{
+  font-size: 1rem !important;
+  padding: 2px 5px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.date-number {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.day.today {
+  border-bottom: 4px solid hsl(0, 100%, 35%);
+}
+
+.day.selected {
+  background-color: hsl(0, 100%, 50%);
+  color: white;
+}
+
+
+
+#todayBtn {
+  margin: 20px auto 30px;
+  display: block;
+  padding: 10px 25px;
+  background: hsl(0, 100%, 45%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.month-popup {
+  position: absolute;
+  background: white;
+  border: 2px solid #ccc;
+  padding: 20px;
+  z-index: 999;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.month-popup select,
+.month-popup input {
+  padding: 5px;
+  font-size: 1rem;
+  margin: 5px; 
+}
+
+.month-popup button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: hsl(0, 100%, 45%);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 50vh;
+  width: 50vw;
+  z-index: 100;
+}
+
+.event-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  z-index: 101;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  max-width: 90%;
+  width: 400px;
+}
+
+.event-modal-content p {
+  margin: 0.5rem 0;
+}
+
+#button{
+  padding: 4px 10px;
+  background-color: hsl(0, 100%, 45%);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#button:hover{
+  box-shadow: 1px 1px #CCC;
+  background-color: hsl(0, 100%, 60%);
+}
+
+.hidden {
+  display: none;
+}
+
+#loading {
+  text-align: center;
+  padding: 2rem;
+  font-weight: bold;
+  height: 50vh;
+}
+
+@media screen and (max-width: 1000px) {
   .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-    gap: 5px;
-  }
-
-  .calendar-grid{
-    grid-auto-rows: 12vw;
-  }
-  #calendarDays{
-    min-width: 15%;
-  }
-
-  .calendar-weekdays {
-    font-weight: bold;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
+    grid-auto-rows: 12vw; /* zorgt voor vierkante daghokken */
+    gap: 1vw;
+    width: 100%;
   }
 
   .calendar-grid .day {
-    background: #f2f2f2;
-    border-radius: 6px;
-    padding: 10px;
-    min-height: unset;
+    padding: 4px;
+    font-size: 0.5rem;
     height: auto;
+    min-height: unset;
+    border-radius: 4px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     justify-content: flex-start;
-    font-size: 1rem;
-    box-shadow: 0 0 3px rgba(0,0,0,0.1);
-    cursor: pointer;
-    overflow: hidden;
+    align-items: flex-start;
   }
 
-  .activity-range{
-    font-size: 1rem !important;
-    padding: 2px 5px !important;
+  .calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 0.8rem;
+    margin: 10px 0 5px;
+    padding: 0 5px;
+  }
+
+  .calendar {
+    width: 100%;
+    padding: 0;
+    font-size: 0.7rem;
+  }
+
+  .activity-range {
+    font-size: 0.3rem !important;
+    padding: 1px 3px !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
   }
 
-  .date-number {
-    font-weight: bold;
-    margin-bottom: 5px;
+  .calendar-header {
+    gap: 3rem;
+    font-size: 1.5rem;
   }
 
-  .day.today {
-    border-bottom: 4px solid hsl(0, 100%, 35%);
+  .calendar-header button {
+    padding: 5px 10px;
+    font-size: 1.2rem;
   }
-
-  .day.selected {
-    background-color: hsl(0, 100%, 50%);
-    color: white;
-  }
-
-
 
   #todayBtn {
-    margin: 20px auto 30px;
-    display: block;
-    padding: 10px 25px;
-    background: hsl(0, 100%, 45%);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .month-popup {
-    position: absolute;
-    background: white;
-    border: 2px solid #ccc;
-    padding: 20px;
-    z-index: 999;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .month-popup select,
-  .month-popup input {
-    padding: 5px;
-    font-size: 1rem;
-    margin: 5px; 
-  }
-
-  .month-popup button {
+    font-size: 0.8rem;
     margin-top: 10px;
-    padding: 8px 15px;
-    background: hsl(0, 100%, 45%);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
   }
-
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 50vh;
-    width: 50vw;
-    z-index: 100;
-  }
-  
-  .event-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    z-index: 101;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    max-width: 90%;
-    width: 400px;
-  }
-  
-  .event-modal-content p {
-    margin: 0.5rem 0;
-  }
-
-  #button{
-    padding: 4px 10px;
-    background-color: hsl(0, 100%, 45%);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  #button:hover{
-    box-shadow: 1px 1px #CCC;
-    background-color: hsl(0, 100%, 60%);
-  }
-  
-  .hidden {
-    display: none;
-  }
-
-  #loading {
-    text-align: center;
-    padding: 2rem;
-    font-weight: bold;
-    height: 50vh;
-  }
-
-  @media screen and (max-width: 1000px) {
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      grid-auto-rows: 12vw; /* zorgt voor vierkante daghokken */
-      gap: 1vw;
-      width: 100%;
-    }
-  
-    .calendar-grid .day {
-      padding: 4px;
-      font-size: 0.5rem;
-      height: auto;
-      min-height: unset;
-      border-radius: 4px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-  
-    .calendar-weekdays {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      font-size: 0.8rem;
-      margin: 10px 0 5px;
-      padding: 0 5px;
-    }
-  
-    .calendar {
-      width: 100%;
-      padding: 0;
-      font-size: 0.7rem;
-    }
-  
-    .activity-range {
-      font-size: 0.3rem !important;
-      padding: 1px 3px !important;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 100%;
-    }
-  
-    .calendar-header {
-      gap: 3rem;
-      font-size: 1.5rem;
-    }
-  
-    .calendar-header button {
-      padding: 5px 10px;
-      font-size: 1.2rem;
-    }
-  
-    #todayBtn {
-      font-size: 0.8rem;
-      margin-top: 10px;
-    }
-  }
+}
   
   

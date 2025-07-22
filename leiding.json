@@ -1,31 +1,131 @@
 [
     {
         "id": "luca-fresca",
-        "naam": "Luca Fresca",
+        "naam": "Luca",
+        "achternaam": "Fresa",
         "email": "lucafresca@jeugdrodekruis.be",
         "telefoon": "+32 492 31 45 81",
         "foto": "img/Fotos_leiding/Luca Fresca.jpg",
         "rol": "leiding",
-        "groepen": "wuppies"
+        "groepen": "wuppies",
+        "favoriete act": "Driedaagse",
+        "Verjaardag": "28-12-1999"
     },
 
     {
         "id": "hanne-convents",
-        "naam": "Hanne Convents",
+        "naam": "Hanne",
+        "achternaam": "Convents",
         "email": "hanneconvents@jeugdrodekruis.be",
         "telefoon": "+32 468 29 41 80",
         "foto": "img/Fotos_leiding/HanneC.jpg" ,
         "rol": "hoofdleiding",
-        "groepen": "juniors"
+        "groepen": "helpertjes",
+        "favoriete act": "",
+        "Verjaardag": ""
     },
 
     {
         "id": "marie-boonen",
-        "naam": "Marie Boonen",
+        "naam": "Marie",
+        "achternaam": "Boonen",
         "email": "marieboonen@jeugdrodekruis.be",
         "telefoon": "+32 4xx xx xx xx",
         "foto": "img/Fotos_leiding/Marie.jpg" ,
         "rol": "hoofdleiding",
-        "groepen": "helpertjes"
+        "groepen": "helpertjes",
+        "favoriete act": "",
+        "Verjaardag": "28-12-1999"
+    },
+
+    {
+        "id": "daphne-vanthournhout",
+        "naam": "Dapnhé",
+        "achternaam": "Vanthournhout",
+        "email": "dapnhevanthournhout@jeugdrodekruis.be",
+        "telefoon": "+32 4xx xx xx xx",
+        "foto": "img/Fotos_leiding/Daphne.jpg" ,
+        "rol": "leiding",
+        "groepen": "wuppies",
+        "favoriete act": "Ledenweekend",
+        "Verjaardag": "22-02-2001"
+    },
+
+    {
+        "id": "gitte-",
+        "naam": "Gitte",
+        "achternaam": "...",
+        "email": "gitte@jeugdrodekruis.be",
+        "telefoon": "+32 4xx xx xx xx",
+        "foto": "img/Fotos_leiding/Gitte.jpg" ,
+        "rol": "leiding",
+        "groepen": "wuppies",
+        "favoriete act": "Ledenweekend",
+        "Verjaardag": "22-02-2001"
+    },
+
+    {
+        "id": "gitte-",
+        "naam": "Gitte",
+        "achternaam": "...",
+        "email": "gitte@jeugdrodekruis.be",
+        "telefoon": "+32 4xx xx xx xx",
+        "foto": "img/Fotos_leiding/Gitte.jpg" ,
+        "rol": "leiding",
+        "groepen": "wuppies",
+        "favoriete act": "Ledenweekend",
+        "Verjaardag": "22-02-2001"
+    },
+
+    {
+        "id": "gitte-",
+        "naam": "Gitte",
+        "achternaam": "...",
+        "email": "gitte@jeugdrodekruis.be",
+        "telefoon": "+32 4xx xx xx xx",
+        "foto": "img/Fotos_leiding/Gitte.jpg" ,
+        "rol": "leiding",
+        "groepen": "wuppies",
+        "favoriete act": "Ledenweekend",
+        "Verjaardag": "22-02-2001"
+    },
+
+    {
+        "id": "gitte-",
+        "naam": "Gitte",
+        "achternaam": "...",
+        "email": "gitte@jeugdrodekruis.be",
+        "telefoon": "+32 4xx xx xx xx",
+        "foto": "img/Fotos_leiding/Gitte.jpg" ,
+        "rol": "leiding",
+        "groepen": "wuppies",
+        "favoriete act": "Ledenweekend",
+        "Verjaardag": "22-02-2001"
+    },
+
+    {
+        "id": "gitte-",
+        "naam": "Gitte",
+        "achternaam": "...",
+        "email": "gitte@jeugdrodekruis.be",
+        "telefoon": "+32 4xx xx xx xx",
+        "foto": "img/Fotos_leiding/Gitte.jpg" ,
+        "rol": "leiding",
+        "groepen": "wuppies",
+        "favoriete act": "Ledenweekend",
+        "Verjaardag": "22-02-2001"
+    },
+
+    {
+        "id": "gitte-",
+        "naam": "Gitte",
+        "achternaam": "...",
+        "email": "gitte@jeugdrodekruis.be",
+        "telefoon": "+32 4xx xx xx xx",
+        "foto": "img/Fotos_leiding/Gitte.jpg" ,
+        "rol": "leiding",
+        "groepen": "wuppies",
+        "favoriete act": "Ledenweekend",
+        "Verjaardag": "22-02-2001"
     }
 ]

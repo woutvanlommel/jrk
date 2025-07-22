@@ -104,7 +104,7 @@ const renderCalendar = async () => {
     const isoDatum = date.toISOString().split("T")[0]; // "2025-07-22"
     const dayDiv = document.createElement("div");
     dayDiv.className = "day";
-    dayDiv.setAttribute("data-datum", isoDatum); // ✅
+    dayDiv.setAttribute("data-datum", isoDatum); 
   
     const dateLabel = document.createElement("span");
     dateLabel.className = "date-number";
