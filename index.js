@@ -1,7 +1,7 @@
   /* Wisselwoord */
   
   document.addEventListener("DOMContentLoaded", function () {
-    const woorden = ["plezier", "vriendschap", "spel", "helpen", "leren", "actie"];
+    const woorden = ["plezier maken", "vriendschap bouwen", "spelen", "helpen", "leren", "actie"];
     const wisselEl = document.querySelector(".wisselwoord");
     let index = 0;
 
