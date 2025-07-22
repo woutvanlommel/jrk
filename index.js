@@ -47,7 +47,7 @@ function maakActiviteitCard(event) {
     // 👇 formatteer datum in YYYY-MM-DD voor URL
     const datumVoorUrl = datumRaw.split("T")[0];
   
-    const link = `/kalender.html?datum=${datumVoorUrl}`; // pas pad aan indien nodig
+    const link = `jrk/kalender.html?datum=${datumVoorUrl}`; // pas pad aan indien nodig
   
     return `
       <a class="activiteitkaart" href="${link}">
