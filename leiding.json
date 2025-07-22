@@ -1,0 +1,31 @@
+[
+    {
+        "id": "luca-fresca",
+        "naam": "Luca Fresca",
+        "email": "lucafresca@jeugdrodekruis.be",
+        "telefoon": "+32 492 31 45 81",
+        "foto": "img/Fotos_leiding/Luca Fresca.jpg",
+        "rol": "leiding",
+        "groepen": "wuppies"
+    },
+
+    {
+        "id": "hanne-convents",
+        "naam": "Hanne Convents",
+        "email": "hanneconvents@jeugdrodekruis.be",
+        "telefoon": "+32 468 29 41 80",
+        "foto": "img/Fotos_leiding/HanneC.jpg" ,
+        "rol": "hoofdleiding",
+        "groepen": "juniors"
+    },
+
+    {
+        "id": "marie-boonen",
+        "naam": "Marie Boonen",
+        "email": "marieboonen@jeugdrodekruis.be",
+        "telefoon": "+32 4xx xx xx xx",
+        "foto": "img/Fotos_leiding/Marie.jpg" ,
+        "rol": "hoofdleiding",
+        "groepen": "helpertjes"
+    }
+]

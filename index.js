@@ -70,4 +70,30 @@ async function laadSpecialeActiviteiten() {
 document.addEventListener("DOMContentLoaded", laadSpecialeActiviteiten);
 
 /* Automatische hoofdleiding */
+fetch('leiding.json')
+  .then(response => response.json())
+  .then(data => {
+    const hoofdleiding = data.filter(p => p.rol === "hoofdleiding");
+    const container = document.getElementById("hoofdleidingContainer");
 
+    hoofdleiding.forEach(persoon => {
+      const div = document.createElement("div");
+      div.className = "persoon";
+
+      div.innerHTML = `
+        <img src="${persoon.foto}" alt="Hoofdleiding ${persoon.naam}">
+        <div class="persooninfo">
+          <h4>${persoon.naam}</h4>
+          <a href="tel:${persoon.telefoon}">
+            📞 ${persoon.telefoon}
+          </a>
+          <a href="mailto:${persoon.email}">
+            ✉️ ${persoon.email}
+          </a>
+        </div>
+      `;
+
+      container.appendChild(div);
+    });
+  })
+  .catch(error => console.error("Fout bij ophalen leiding.json:", error));

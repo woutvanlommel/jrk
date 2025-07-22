@@ -518,8 +518,63 @@ footer {
 
 /* Hoofdleiding */
 
+.hoofdleiding {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 2rem;
+  margin: 4rem 0px;
+}
 
+.persoon {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem;
+  max-width: 50%;
+  flex: 1 1 20%;
+}
 
+.persoon img {
+  width: clamp(5rem, 10vw, 8rem);
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.persooninfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 0.4rem;
+}
+
+.persooninfo h4 {
+  margin: 0;
+  color: red;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.persooninfo a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media screen and (max-width: 900px) {
+  .hoofdleiding {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .persoon {
+    flex: 1 1 100%;
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+}
 
 .groepen-grid {
     display: grid;
