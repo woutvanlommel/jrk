@@ -205,6 +205,11 @@ footer {
   transition: all 0.3s ease;
 }
 
+.navmenujrk a.active {
+  color: red;
+  font-weight: bold;
+}
+
 /* Bij scrollen: hoogte kleiner */
 .navbarjrk.scrolled {
   position: sticky;
