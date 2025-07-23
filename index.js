@@ -44,11 +44,12 @@ function maakActiviteitCard(event) {
     });
     const locatie = event.location || "Locatie niet bekend";
 
-    console.log("Gegenereerde link:", link);
   
     // 👇 formatteer datum in YYYY-MM-DD voor URL
     const datumVoorUrl = datumRaw.split("T")[0];
     const link = `/jrk/kalender.php?datum=${datumVoorUrl}`; // pas pad aan indien nodig
+
+    console.log("Gegenereerde link:", link);
   
     return `
       <a class="activiteitkaart" href="${link}">
