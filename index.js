@@ -43,11 +43,12 @@ function maakActiviteitCard(event) {
       day: "numeric"
     });
     const locatie = event.location || "Locatie niet bekend";
+
+    console.log("Gegenereerde link:", link);
   
     // 👇 formatteer datum in YYYY-MM-DD voor URL
     const datumVoorUrl = datumRaw.split("T")[0];
-  
-    const link = `/jrk/kalender.html?datum=${datumVoorUrl}`; // pas pad aan indien nodig
+    const link = `/jrk/kalender.php?datum=${datumVoorUrl}`; // pas pad aan indien nodig
   
     return `
       <a class="activiteitkaart" href="${link}">
@@ -64,6 +65,9 @@ function maakActiviteitCard(event) {
 async function laadSpecialeActiviteiten() {
   const container = document.getElementById("speciale-activiteiten-container");
   const activiteiten = await getSpecialeActiviteiten();
+
+  
+
   container.innerHTML = activiteiten.map(maakActiviteitCard).join("");
 }
 
