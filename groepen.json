@@ -27,5 +27,10 @@
       "naam": "Extern",
       "kleur": "#3b5743",
       "afbeelding": "img/Groepen/extern.jpg"
+    },
+
+    {
+      "naam": "Kookouders",
+      "kleur": "#CCC"
     }
   ]

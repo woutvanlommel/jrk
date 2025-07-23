@@ -2,14 +2,14 @@
     {
         "id": "luca-fresca",
         "naam": "Luca",
-        "achternaam": "Fresa",
-        "email": "lucafresca@jeugdrodekruis.be",
-        "telefoon": "+32 492 31 45 81",
+        "achternaam": "Fresca",
+        "email": "...",
+        "telefoon": "...",
         "foto": "img/Fotos_leiding/Luca Fresca.jpg",
         "rol": "leiding",
         "groepen": "wuppies",
-        "favoriete act": "Driedaagse",
-        "Verjaardag": "28-12-1999"
+        "favorieteAct": "...",
+        "Verjaardag": "..."
     },
 
     {
@@ -20,112 +20,325 @@
         "telefoon": "+32 468 29 41 80",
         "foto": "img/Fotos_leiding/HanneC.jpg" ,
         "rol": "hoofdleiding",
-        "groepen": "helpertjes",
-        "favoriete act": "",
-        "Verjaardag": ""
+        "groepen": "juniors",
+        "favorieteAct": "...",
+        "Verjaardag": "..."
     },
 
     {
         "id": "marie-boonen",
         "naam": "Marie",
         "achternaam": "Boonen",
-        "email": "marieboonen@jeugdrodekruis.be",
-        "telefoon": "+32 4xx xx xx xx",
+        "email": "...",
+        "telefoon": "...",
         "foto": "img/Fotos_leiding/Marie.jpg" ,
         "rol": "hoofdleiding",
-        "groepen": "helpertjes",
-        "favoriete act": "",
-        "Verjaardag": "28-12-1999"
+        "groepen": "tippers",
+        "favorieteAct": "...",
+        "Verjaardag": "..."
     },
 
     {
         "id": "daphne-vanthournhout",
         "naam": "Dapnhé",
         "achternaam": "Vanthournhout",
-        "email": "dapnhevanthournhout@jeugdrodekruis.be",
-        "telefoon": "+32 4xx xx xx xx",
+        "email": "...",
+        "telefoon": "...",
         "foto": "img/Fotos_leiding/Daphne.jpg" ,
         "rol": "leiding",
         "groepen": "wuppies",
-        "favoriete act": "Ledenweekend",
-        "Verjaardag": "22-02-2001"
+        "favorieteAct": "...",
+        "Verjaardag": "..."
     },
 
     {
         "id": "gitte-",
         "naam": "Gitte",
         "achternaam": "...",
-        "email": "gitte@jeugdrodekruis.be",
-        "telefoon": "+32 4xx xx xx xx",
+        "email": "...",
+        "telefoon": "...",
         "foto": "img/Fotos_leiding/Gitte.jpg" ,
         "rol": "leiding",
         "groepen": "wuppies",
-        "favoriete act": "Ledenweekend",
-        "Verjaardag": "22-02-2001"
+        "favorieteAct": "...",
+        "Verjaardag": "..."
     },
 
     {
-        "id": "gitte-",
-        "naam": "Gitte",
-        "achternaam": "...",
-        "email": "gitte@jeugdrodekruis.be",
-        "telefoon": "+32 4xx xx xx xx",
-        "foto": "img/Fotos_leiding/Gitte.jpg" ,
+        "id": "jules-clabots",
+        "naam": "Jules",
+        "achternaam": "Clabots",
+        "email": "",
+        "telefoon": "...",
+        "foto": "img/Fotos_leiding/Jules.jpeg" ,
         "rol": "leiding",
-        "groepen": "wuppies",
-        "favoriete act": "Ledenweekend",
-        "Verjaardag": "22-02-2001"
+        "groepen": "helpertjes",
+        "favorieteAct": "...",
+        "Verjaardag": "..."
     },
 
     {
-        "id": "gitte-",
-        "naam": "Gitte",
-        "achternaam": "...",
-        "email": "gitte@jeugdrodekruis.be",
-        "telefoon": "+32 4xx xx xx xx",
-        "foto": "img/Fotos_leiding/Gitte.jpg" ,
+        "id": "lien-dupont",
+        "naam": "Lien",
+        "achternaam": "Dupont",
+        "email": "...",
+        "telefoon": "...",
+        "foto": "img/Fotos_leiding/Lien.jpg" ,
         "rol": "leiding",
-        "groepen": "wuppies",
-        "favoriete act": "Ledenweekend",
-        "Verjaardag": "22-02-2001"
+        "groepen": "helpertjes",
+        "favorieteAct": "...",
+        "Verjaardag": "..."
     },
 
     {
-        "id": "gitte-",
-        "naam": "Gitte",
-        "achternaam": "...",
-        "email": "gitte@jeugdrodekruis.be",
-        "telefoon": "+32 4xx xx xx xx",
-        "foto": "img/Fotos_leiding/Gitte.jpg" ,
+        "id": "liene-smits",
+        "naam": "Liene",
+        "achternaam": "Smits",
+        "email": "...",
+        "telefoon": "...",
+        "foto": "img/Fotos_leiding/Liene.jpeg",
         "rol": "leiding",
-        "groepen": "wuppies",
-        "favoriete act": "Ledenweekend",
-        "Verjaardag": "22-02-2001"
+        "groepen": "helpertjes",
+        "favorieteAct": "...",
+        "Verjaardag": "..."
     },
 
     {
-        "id": "gitte-",
-        "naam": "Gitte",
-        "achternaam": "...",
-        "email": "gitte@jeugdrodekruis.be",
-        "telefoon": "+32 4xx xx xx xx",
-        "foto": "img/Fotos_leiding/Gitte.jpg" ,
+        "id": "stijn-berkx",
+        "naam": "Stijn",
+        "achternaam": "Berkx",
+        "email": "...",
+        "telefoon": "...",
+        "foto": "img/Fotos_leiding/Stijn.jpg" ,
         "rol": "leiding",
-        "groepen": "wuppies",
-        "favoriete act": "Ledenweekend",
-        "Verjaardag": "22-02-2001"
+        "groepen": "tippers",
+        "favorieteAct": "...",
+        "Verjaardag": "..."
     },
 
     {
-        "id": "gitte-",
-        "naam": "Gitte",
-        "achternaam": "...",
-        "email": "gitte@jeugdrodekruis.be",
-        "telefoon": "+32 4xx xx xx xx",
-        "foto": "img/Fotos_leiding/Gitte.jpg" ,
+        "id": "jonas-vanoppen",
+        "naam": "Jonas",
+        "achternaam": "Vanoppen",
+        "email": "...",
+        "telefoon": "...",
+        "foto": "img/Fotos_leiding/Jonas.jpg" ,
         "rol": "leiding",
-        "groepen": "wuppies",
-        "favoriete act": "Ledenweekend",
-        "Verjaardag": "22-02-2001"
+        "groepen": "juniors",
+        "favorieteAct": "...",
+        "Verjaardag": "..."
+    },
+
+    {
+        "id": "thibeau-meeuwissen",
+        "naam": "Thibeau",
+        "achternaam": "Meeuwissen",
+        "email": "...",
+        "telefoon": "...",
+        "foto": "img/Fotos_leiding/Thibeau.jpg" ,
+        "rol": "leiding",
+        "groepen": "juniors",
+        "favorieteAct": "...",
+        "Verjaardag": "..."
+    },
+
+
+
+
+
+
+    {
+        "id": "wout-vanlommel",
+        "naam": "Wout",
+        "achternaam": "V.",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/WoutV.jpeg",
+        "rol": "oud-leiding",
+        "groepen": "extern",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "bregje-vanoppen",
+        "naam": "Bregje",
+        "achternaam": "",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/Bregje.jpg",
+        "rol": "oud-leiding",
+        "groepen": "extern",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "Cederic Nijssen",
+        "naam": "Cederic",
+        "achternaam": "",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/Cederic.jpg",
+        "rol": "oud-leiding",
+        "groepen": "extern",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "cindy-jiri",
+        "naam": "Cindy & Jiri",
+        "achternaam": "",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/Jiri&Cindy.jpg",
+        "rol": "kookouders",
+        "groepen": "kookouders",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "hanne-serneels",
+        "naam": "Hanne",
+        "achternaam": "S.",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/HanneS.png",
+        "rol": "oud-leiding",
+        "groepen": "extern",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "jolien-willems",
+        "naam": "Jolien",
+        "achternaam": "",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/Jolien.jpg",
+        "rol": "oud-leiding",
+        "groepen": "extern",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "kris-sofie",
+        "naam": "Kris & Sofie",
+        "achternaam": "",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/Kris&Sofie.jpg",
+        "rol": "kookouders",
+        "groepen": "kookouders",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "lene-elsen",
+        "naam": "Lene",
+        "achternaam": "",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/Lene.jpg",
+        "rol": "oud-leiding",
+        "groepen": "extern",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "lien-valee",
+        "naam": "Lien",
+        "achternaam": "",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/Lien.jpg",
+        "rol": "oud-leiding",
+        "groepen": "extern",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "lore-valee",
+        "naam": "Lore",
+        "achternaam": "",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/Lore.jpg",
+        "rol": "oud-leiding",
+        "groepen": "extern",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "carine-ludo",
+        "naam": "Carine & Ludo",
+        "achternaam": "",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/Ludo&Carine.png",
+        "rol": "kookouders",
+        "groepen": "kookouders",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "roben-nijssen",
+        "naam": "Roben",
+        "achternaam": "",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/Roben.jpg",
+        "rol": "oud-leiding",
+        "groepen": "extern",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "salien-jamaer",
+        "naam": "Salien",
+        "achternaam": "",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/Salien.jpg",
+        "rol": "oud-leiding",
+        "groepen": "extern",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "wout-steegmans",
+        "naam": "Wout",
+        "achternaam": "S.",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/WouterS.jpg",
+        "rol": "oud-leiding",
+        "groepen": "extern",
+        "favoriete act": "",
+        "Verjaardag": ""
+    },
+
+    {
+        "id": "ruben-steegmans",
+        "naam": "Ruben",
+        "achternaam": "",
+        "email": "",
+        "telefoon": "",
+        "foto": "img/Foto's helpende handen/Ruben.png",
+        "rol": "oud-leiding",
+        "groepen": "extern",
+        "favoriete act": "",
+        "Verjaardag": ""
     }
 ]

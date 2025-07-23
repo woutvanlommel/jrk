@@ -11,13 +11,10 @@ Promise.all([
         const groepDiv = document.createElement("div");
         groepDiv.classList.add("groep");
         groepDiv.style.backgroundColor = groep.kleur;
-        groepDiv.style.backgroundImage = `url(${groep.afbeelding})`;
-        groepDiv.style.backgroundSize = "cover";
-        groepDiv.style.backgroundPosition = "center";
 
         const overlay = document.createElement("div");
         overlay.className = "groep-overlay";
-        overlay.innerHTML = `<h3>${groep.naam}</h3><p>${groepsLeiding.length} leiding(en)</p>`;
+        overlay.innerHTML = `<h3>${groep.naam}</h3>`;
         groepDiv.appendChild(overlay);
 
         groepDiv.addEventListener("click", () => {
@@ -38,6 +35,13 @@ function openModal(groepNaam, leidingLeden) {
 
     title.textContent = groepNaam;
     content.innerHTML = ""; // reset
+
+    // ✅ Sorteer alfabetisch op volledige naam
+    leidingLeden.sort((a, b) => {
+        const naamA = `${a.naam} ${a.achternaam}`.toLowerCase();
+        const naamB = `${b.naam} ${b.achternaam}`.toLowerCase();
+        return naamA.localeCompare(naamB);
+    });
 
     leidingLeden.forEach(p => {
         const pDiv = document.createElement("div");
@@ -62,4 +66,20 @@ function openModal(groepNaam, leidingLeden) {
 // sluiten van de modal
 document.querySelector(".close-modal").addEventListener("click", () => {
     document.getElementById("groepModal").style.display = "none";
+});
+
+// sluiten bij klik buiten de modal
+window.addEventListener("click", function (e) {
+    const modal = document.getElementById("groepModal");
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
+// sluiten met ESC of ENTER
+document.addEventListener("keydown", function (e) {
+    const modal = document.getElementById("groepModal");
+    if (modal.style.display === "block" && (e.key === "Escape" || e.key === "Enter")) {
+        modal.style.display = "none";
+    }
 });
