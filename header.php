@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg" href="img/Favicon.svg">
     <title>Jeugd Rode Kruis Herckenrode</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/ef4e3e0cf6.js" crossorigin="anonymous"></script>
 </head>
 

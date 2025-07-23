@@ -5,9 +5,9 @@ function jrk_enqueue_scripts() {
     wp_enqueue_style('jrk-style', get_stylesheet_uri());
 
     // Jouw echte stylesheet
-    $custom_style_path = get_template_directory() . '/styles.css';
+    $custom_style_path = get_template_directory() . '/style.css';
     if (file_exists($custom_style_path)) {
-        wp_enqueue_style('jrk-custom-style', get_template_directory_uri() . '/styles.css');
+        wp_enqueue_style('jrk-custom-style', get_template_directory_uri() . '/style.css');
     }
 
     // JavaScript-bestanden toevoegen
