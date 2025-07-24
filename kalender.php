@@ -1,6 +1,17 @@
-<?php 
-  $activePage = 'kalender';
-  include 'header.php'; 
+<?php
+/*
+Template Name: Kalenderpagina
+*/
+
+if (!isset($activePage)) {
+    $activePage = 'kalender';
+}
+
+if (function_exists('get_header')) {
+    get_header();
+} else {
+    include 'header.php';
+}
 ?>
 
 <header>
@@ -8,25 +19,31 @@
 </header>
 
 <main>
+    <!-- 📅 Lade-indicator -->
     <div id="loading">Kalender wordt geladen...</div>
 
+    <!-- 📆 Kalenderblok -->
     <div id="calendarWrapper" style="display: none;">
         <div class="calendar">
+            <!-- 🔼 Navigatie -->
             <div class="calendar-header">
-                <button id="prevMonth">&lt;</button>
+                <button id="prevMonth" type="button">&lt;</button>
                 <div id="monthYear"></div>
-                <button id="nextMonth">&gt;</button>
+                <button id="nextMonth" type="button">&gt;</button>
             </div>
 
+            <!-- 📅 Weekdagen -->
             <div class="calendar-weekdays">
                 <div>Ma</div><div>Di</div><div>Wo</div><div>Do</div><div>Vr</div><div style="color: red;">Za</div><div style="color: red;">Zo</div>
             </div>
 
+            <!-- 📆 Dagen -->
             <div class="calendar-grid" id="calendarDays"></div>
 
-            <button id="todayBtn">Vandaag</button>
+            <button id="todayBtn" type="button">Vandaag</button>
         </div>
 
+        <!-- 📆 Maand/Jaar selector -->
         <div id="monthPicker" class="month-popup hidden">
             <label for="monthSelect">Maand:
                 <select id="monthSelect">
@@ -49,20 +66,25 @@
                 <input type="number" id="yearSelect" min="2000" max="2100">
             </label>
             <br />
-            <button id="goToDate">Ga</button>
+            <button id="goToDate" type="button">Ga</button>
         </div>
     </div>
 
+    <!-- 🔍 Modal voor eventdetails -->
     <div class="modal-overlay" id="modalOverlay"></div>
     <div class="event-modal" id="eventModal">
         <h3 id="eventTitle"></h3>
         <p id="eventTime"></p>
         <p id="eventLocation"></p>
         <p id="eventDescription"></p>
-        <button onclick="closeEventModal()" id="button">Sluiten</button>
+        <button onclick="closeEventModal()" id="button" type="button">Sluiten</button>
     </div>
-
-    <script src="kalender.js"></script>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php
+if (function_exists('get_footer')) {
+    get_footer();
+} else {
+    include 'footer.php';
+}
+?>

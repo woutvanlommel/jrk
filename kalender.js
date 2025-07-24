@@ -1,12 +1,14 @@
-// 🔑 API info
-const API_KEY = "AIzaSyCEDTK2UrwicSEqgrjmY8QetAbGEYQGh6Q";
-const CALENDAR_ID = ["woutvanlommel7@gmail.com",
-                    "9f8aecf23be1e8387aa31872f5df2a5308dde848a01f854f9db282cad285b683@group.calendar.google.com",
-                    "0baaf1cea005548f41707e9942f8fe0733e31efe6b654b71f90ac65196da9fcf@group.calendar.google.com",
-                    "b940058507355683160f31fa21ce080c434a4b3344447e355e402a7a4bfa7d84@group.calendar.google.com",
-                    "7b5c3807b7714e41c9260b40a1ae2ecde3042aa4c1f6dc23715c8b5d951b303c@group.calendar.google.com"
-]
+console.log("✅ kalender.js is geladen");
 
+console.log(API_KEY); // 👉 dit werkt perfect (toont: abc123)
+
+const CALENDAR_ID = [
+  "woutvanlommel7@gmail.com",
+  "9f8aecf23be1e8387aa31872f5df2a5308dde848a01f854f9db282cad285b683@group.calendar.google.com",
+  "0baaf1cea005548f41707e9942f8fe0733e31efe6b654b71f90ac65196da9fcf@group.calendar.google.com",
+  "b940058507355683160f31fa21ce080c434a4b3344447e355e402a7a4bfa7d84@group.calendar.google.com",
+  "7b5c3807b7714e41c9260b40a1ae2ecde3042aa4c1f6dc23715c8b5d951b303c@group.calendar.google.com"
+];
 
 const calendarColors = {
   "woutvanlommel7@gmail.com": "#FFE135",
@@ -16,9 +18,6 @@ const calendarColors = {
   "7b5c3807b7714e41c9260b40a1ae2ecde3042aa4c1f6dc23715c8b5d951b303c@group.calendar.google.com": "#734768"
 };
 
-
-
-// 🗅️ Elementen
 const calendarDays = document.getElementById("calendarDays");
 const monthYear = document.getElementById("monthYear");
 const prevMonth = document.getElementById("prevMonth");
@@ -35,7 +34,6 @@ const eventTime = document.getElementById("eventTime");
 const eventLocation = document.getElementById("eventLocation");
 const eventDescription = document.getElementById("eventDescription");
 
-// Zorg dat de modal standaard verborgen is bij het laden
 modal.classList.add("hidden");
 modalOverlay.classList.add("hidden");
 
@@ -48,11 +46,10 @@ const monthNames = [
   "Juli", "Augustus", "September", "Oktober", "November", "December"
 ];
 
-// 📅 Event ophalen via API
 async function fetchEvents(year, month) {
+  console.log("🔄 fetchEvents start:", year, month + 1);
   const timeMin = new Date(year, month, 1).toISOString();
   const timeMax = new Date(year, month + 1, 0, 23, 59, 59).toISOString();
-
   let allEvents = [];
 
   for (const calendarId of CALENDAR_ID) {
@@ -62,23 +59,24 @@ async function fetchEvents(year, month) {
       const response = await fetch(url);
       const data = await response.json();
       const items = data.items || [];
+      console.log(`📥 Events van ${calendarId}:`, items.length);
 
-      // Voeg kleurnaam toe op basis van agenda
       items.forEach(item => {
         item.calendarId = calendarId;
       });
 
       allEvents = allEvents.concat(items);
     } catch (error) {
-      console.error(`Fout bij ophalen van agenda ${calendarId}:`, error);
+      console.error(`❌ Fout bij ophalen van events (${calendarId}):`, error);
     }
   }
 
+  console.log("📊 Totaal aantal events opgehaald:", allEvents.length);
   return allEvents;
 }
 
-// 🗓️ Kalender bouwen
 const renderCalendar = async () => {
+  console.log("🛠️ Start renderCalendar()");
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   const events = await fetchEvents(year, month);
@@ -88,8 +86,7 @@ const renderCalendar = async () => {
 
   const firstDayOfMonth = new Date(year, month, 1);
   const lastDayOfMonth = new Date(year, month + 1, 0);
-  const startWeekDay = (firstDayOfMonth.getDay() + 6) % 7; // Ma = 0, Zo = 6
-
+  const startWeekDay = (firstDayOfMonth.getDay() + 6) % 7;
   const prevMonthLastDate = new Date(year, month, 0).getDate();
 
   for (let i = startWeekDay - 1; i >= 0; i--) {
@@ -101,20 +98,20 @@ const renderCalendar = async () => {
 
   for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
     const date = new Date(year, month, i);
-    const isoDatum = date.toISOString().split("T")[0]; // "2025-07-22"
+    const isoDatum = date.toISOString().split("T")[0];
     const dayDiv = document.createElement("div");
     dayDiv.className = "day";
-    dayDiv.setAttribute("data-datum", isoDatum); 
-  
+    dayDiv.setAttribute("data-datum", isoDatum);
+
     const dateLabel = document.createElement("span");
     dateLabel.className = "date-number";
     dateLabel.textContent = i;
     dayDiv.appendChild(dateLabel);
-  
+
     if (today.toDateString() === date.toDateString()) {
       dayDiv.classList.add("today");
     }
-  
+
     calendarDays.appendChild(dayDiv);
   }
 
@@ -128,10 +125,8 @@ const renderCalendar = async () => {
     calendarDays.appendChild(dayDiv);
   }
 
-  const days = document.querySelectorAll(".day");
-
   events.forEach(ev => {
-    let start = new Date(ev.start?.dateTime || ev.start?.date);
+    const start = new Date(ev.start?.dateTime || ev.start?.date);
     let end = new Date(ev.end?.dateTime || ev.end?.date);
     const isAllDay = !ev.start?.dateTime;
 
@@ -160,12 +155,6 @@ const renderCalendar = async () => {
       activity.className = "activity-range";
       activity.textContent = eventTitleText;
       activity.style.backgroundColor = calendarColors[ev.calendarId] || "#444";
-      activity.style.color = "#fff";
-      activity.style.width = "100%"
-      activity.style.padding = "3px 10px";
-      activity.style.marginTop = "5px";
-      activity.style.borderRadius = "4px";
-      activity.style.fontSize = "0.8rem";
 
       activity.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -194,23 +183,22 @@ const renderCalendar = async () => {
         modal.classList.remove("hidden");
         modalOverlay.classList.remove("hidden");
       });
-      
+
       dayEl.appendChild(activity);
     }
   });
+
+  console.log("✅ Kalender gerenderd voor", monthNames[month], year);
 };
 
-// 🔁 Navigatie
 prevMonth.addEventListener("click", () => {
   currentDate.setMonth(currentDate.getMonth() - 1);
   renderCalendar();
 });
-
 nextMonth.addEventListener("click", () => {
   currentDate.setMonth(currentDate.getMonth() + 1);
   renderCalendar();
 });
-
 todayBtn.addEventListener("click", () => {
   currentDate = new Date(today.getFullYear(), today.getMonth(), 1);
   selectedDay = null;
@@ -245,12 +233,8 @@ goToDateBtn.addEventListener("click", () => {
 function closeEventModal() {
   modal.classList.add("hidden");
   modalOverlay.classList.add("hidden");
-
-  // Verwijder highlight van geselecteerde dag
   const highlighted = document.querySelector(".highlight");
   if (highlighted) highlighted.classList.remove("highlight");
-
-  // Verwijder ?datum=... uit de URL zonder te herladen
   const url = new URL(window.location);
   url.searchParams.delete("datum");
   window.history.replaceState({}, document.title, url.pathname);
@@ -265,14 +249,8 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-
 function scrollNaarDatum(datum) {
-  // Controleer of datum een all-day event is dat op vorige dag eindigde
   const geselecteerde = new Date(datum);
-  const vandaag = new Date();
-  
-  // Kalender rendert activiteiten op de correcte dag (zonder -1 offset), dus wij moeten +1 doen als nodig
-  // In dit geval doen we altijd +1 want de meeste issues zijn met all-day events met end = volgende dag
   const datumPlus1 = new Date(geselecteerde.getTime() - 1);
   const iso = datumPlus1.toISOString().split("T")[0];
 
@@ -288,8 +266,7 @@ function scrollNaarDatum(datum) {
   }
 }
 
-
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
   const params = new URLSearchParams(window.location.search);
   const geselecteerdeDatum = params.get("datum");
 
@@ -298,16 +275,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (datumParts.length === 3) {
       const jaar = parseInt(datumParts[0]);
       const maand = parseInt(datumParts[1]) - 1;
-      currentDate = new Date(jaar, maand, 1); // ✅ MOET VÓÓR renderCalendar()
+      currentDate = new Date(jaar, maand, 1);
     }
   }
 
   renderCalendar().then(() => {
+    console.log("📅 Eerste render klaar");
     document.getElementById("calendarWrapper").style.display = "block";
     document.getElementById("loading").style.display = "none";
 
     if (geselecteerdeDatum) {
-      scrollNaarDatum(geselecteerdeDatum); // opent nu ook automatisch de modal!
+      scrollNaarDatum(geselecteerdeDatum);
     }
   });
-});
+})();

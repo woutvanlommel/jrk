@@ -26,27 +26,24 @@ h1{
   text-align: center;
 }
 
-.primarybutton{
+.primarybutton {
   font-size: clamp(0.6rem, 3vw, 1rem);
   padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.8rem, 2vw, 1rem);
   background-color: hsl(0, 100%, 50%);
   border-radius: 10px;
-  border: 0;
-  margin: 0,5rem auto 0 auto;
+  border: none;
+  margin: 0.5rem auto 0 auto; /* ✅ met punt in plaats van komma */
   color: white;
+  text-decoration: none;
   cursor: pointer;
   display: inline-block;
 }
 
-.primarybutton a{
-  text-decoration: none;
-  color: white;
-}
-
-.primarybutton:hover{
+.primarybutton:hover {
   background-color: hsl(0, 100%, 45%);
   color: white;
-  box-shadow: 1px 1px 5px grey
+  box-shadow: 1px 1px 5px grey;
+  text-decoration: none; /* extra veilig */
 }
 
 header {
