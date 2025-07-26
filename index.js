@@ -1,8 +1,13 @@
 /* ===================== */
-/* 🔁 Wisselwoord        */
+/* 🔁 Wisselwoord (dynamisch uit WordPress) */
 /* ===================== */
 document.addEventListener("DOMContentLoaded", function () {
-  const woorden = ["plezier maken", "vriendschap bouwen", "spelen", "helpen", "leren", "actie"];
+  if (typeof wisselData === "undefined" || !Array.isArray(wisselData.woorden) || wisselData.woorden.length === 0) {
+    console.warn("⚠️ Geen wisselwoorden gevonden in wisselData");
+    return;
+  }
+
+  const woorden = wisselData.woorden;
   const wisselEl = document.querySelector(".wisselwoord");
   let index = 0;
 
@@ -100,37 +105,40 @@ function laadHoofdleiding() {
     return;
   }
 
-  const basePath = (typeof jrkData !== "undefined" && jrkData.themeUrl) ? jrkData.themeUrl : ".";
-  const jsonUrl = `${basePath}/leiding.json`;
-  console.log("📁 Leiding.json pad:", jsonUrl);
+  if (typeof leidingData === "undefined" || !Array.isArray(leidingData.leiding)) {
+    console.error("❌ Leidingdata niet gevonden of ongeldig");
+    return;
+  }
 
-  fetch(jsonUrl)
-    .then(response => {
-      if (!response.ok) throw new Error("Leiding.json niet gevonden");
-      return response.json();
-    })
-    .then(data => {
-      const hoofdleiding = data.filter(p => p.rol === "hoofdleiding");
-      console.log(`👥 ${hoofdleiding.length} hoofdleiding(en) gevonden`);
+  const hoofdleiding = leidingData.leiding.filter(p =>
+    Array.isArray(p.rollen)
+      ? p.rollen.includes("hoofdleiding")
+      : p.rollen === "hoofdleiding"
+  );
 
-      hoofdleiding.forEach(persoon => {
-        const div = document.createElement("div");
-        div.className = "persoon";
+  console.log(`👥 ${hoofdleiding.length} hoofdleiding(en) gevonden`);
 
-        div.innerHTML = `
-          <img src="${persoon.foto}" alt="Hoofdleiding ${persoon.naam}">
-          <div class="persooninfo">
-            <h4>${persoon.naam}</h4>
-            <a href="tel:${persoon.telefoon}">📞 ${persoon.telefoon}</a>
-            <a href="mailto:${persoon.email}">✉️ ${persoon.email}</a>
-          </div>
-        `;
+  if (hoofdleiding.length === 0) {
+    container.innerHTML = "<p>Er is momenteel geen hoofdleiding beschikbaar.</p>";
+    return;
+  }
 
-        container.appendChild(div);
-        console.log(`➕ ${persoon.naam} toegevoegd aan hoofdleidingContainer`);
-      });
-    })
-    .catch(error => console.error("❌ Fout bij ophalen leiding.json:", error));
+  hoofdleiding.forEach(persoon => {
+    const div = document.createElement("div");
+    div.className = "persoon";
+
+    div.innerHTML = `
+      <img src="${persoon.foto}" alt="Hoofdleiding ${persoon.naam}">
+      <div class="persooninfo">
+        <h4>${persoon.naam}</h4>
+        <a href="tel:${persoon.telefoon}">📞 ${persoon.telefoon}</a>
+        <a href="mailto:${persoon.email}">✉️ ${persoon.email}</a>
+      </div>
+    `;
+
+    container.appendChild(div);
+    console.log(`➕ ${persoon.naam} toegevoegd aan hoofdleidingContainer`);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", laadHoofdleiding);
