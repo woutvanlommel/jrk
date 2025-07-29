@@ -35,15 +35,16 @@ const SPECIAL_CALENDAR_ID = "0baaf1cea005548f41707e9942f8fe0733e31efe6b654b71f90
 
 async function getSpecialeActiviteiten() {
   const now = new Date().toISOString();
-  const url = `https://www.googleapis.com/calendar/v3/calendars/${SPECIAL_CALENDAR_ID}/events?key=${API_KEY}&timeMin=${now}&singleEvents=true&orderBy=startTime&maxResults=3`;
-
+  const url = `${jrkCalendar.restUrl}?timeMin=${encodeURIComponent(now)}&singleEvents=true&orderBy=startTime&maxResults=3`;
+  
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log("✅ Activiteiten opgehaald van Google Calendar:", data.items);
-    return data.items || [];
+    console.log("✅ Activiteiten opgehaald van REST endpoint:", data.length);
+    
+    return data.filter(ev => ev.calendarId === SPECIAL_CALENDAR_ID);
   } catch (err) {
-    console.error("❌ Fout bij ophalen Google Calendar-data:", err);
+    console.error("❌ Fout bij ophalen via REST endpoint:", err);
     return [];
   }
 }
@@ -137,7 +138,7 @@ function laadHoofdleiding() {
     `;
 
     container.appendChild(div);
-    console.log(`➕ ${persoon.naam} toegevoegd aan hoofdleidingContainer`);
+    console.log(`➕ ${persoon.voornaam} toegevoegd aan hoofdleidingContainer`);
   });
 }
 

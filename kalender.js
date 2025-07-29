@@ -1,16 +1,18 @@
 console.log("✅ kalender.js is geladen");
 
-// 🎯 REST endpoint i.p.v. API key direct
-const API_ENDPOINT = `${jrkData.siteUrl}/wp-json/jrk/v1/calendar`;
+// 🎯 REST endpoint
+const API_KEY = jrkCalendar.apiKey;
+const API_ENDPOINT = jrkCalendar.restUrl;
 
 const calendarColors = {
-  "woutvanlommel7@gmail.com": "#FFE135",
   "9f8aecf23be1e8387aa31872f5df2a5308dde848a01f854f9db282cad285b683@group.calendar.google.com": "#FF0000",
   "0baaf1cea005548f41707e9942f8fe0733e31efe6b654b71f90ac65196da9fcf@group.calendar.google.com": "#616F5F",
   "b940058507355683160f31fa21ce080c434a4b3344447e355e402a7a4bfa7d84@group.calendar.google.com": "#FFC107",
-  "7b5c3807b7714e41c9260b40a1ae2ecde3042aa4c1f6dc23715c8b5d951b303c@group.calendar.google.com": "#734768"
+  "7b5c3807b7714e41c9260b40a1ae2ecde3042aa4c1f6dc23715c8b5d951b303c@group.calendar.google.com": "#734768",
+  "5578d000dbaac65888adf7dbd787d7c7187386ae40ca78e20f3859e5487ffa9e@group.calendar.google.com": "#FFFFE0"
 };
 
+// 🔗 DOM elementen
 const calendarDays = document.getElementById("calendarDays");
 const monthYear = document.getElementById("monthYear");
 const prevMonth = document.getElementById("prevMonth");
@@ -26,19 +28,20 @@ const eventTitle = document.getElementById("eventTitle");
 const eventTime = document.getElementById("eventTime");
 const eventLocation = document.getElementById("eventLocation");
 const eventDescription = document.getElementById("eventDescription");
+const closeModalBtn = modal.querySelector("button"); // ❌ Close button
 
 modal.classList.add("hidden");
 modalOverlay.classList.add("hidden");
 
 const today = new Date();
 let currentDate = new Date(today.getFullYear(), today.getMonth(), 1);
-let selectedDay = null;
 
 const monthNames = [
   "Januari", "Februari", "Maart", "April", "Mei", "Juni",
   "Juli", "Augustus", "September", "Oktober", "November", "December"
 ];
 
+// 📡 Events ophalen
 async function fetchEvents(year, month) {
   console.log("🔄 fetchEvents start:", year, month + 1);
   const timeMin = new Date(year, month, 1).toISOString();
@@ -46,9 +49,17 @@ async function fetchEvents(year, month) {
 
   try {
     const url = `${API_ENDPOINT}?timeMin=${encodeURIComponent(timeMin)}&timeMax=${encodeURIComponent(timeMax)}`;
+    console.log("🌐 Fetch URL:", url);
+
     const response = await fetch(url);
     const data = await response.json();
-    console.log("📥 Events opgehaald:", data.length);
+
+    if (!Array.isArray(data)) {
+      console.error("❌ API gaf geen array terug:", data);
+      return [];
+    }
+
+    console.log(`📥 ${data.length} events opgehaald`);
     return data;
   } catch (error) {
     console.error("❌ Fout bij ophalen van events:", error);
@@ -56,6 +67,7 @@ async function fetchEvents(year, month) {
   }
 }
 
+// 📅 Kalender renderen
 const renderCalendar = async () => {
   console.log("🛠️ Start renderCalendar()");
   const year = currentDate.getFullYear();
@@ -70,49 +82,35 @@ const renderCalendar = async () => {
   const startWeekDay = (firstDayOfMonth.getDay() + 6) % 7;
   const prevMonthLastDate = new Date(year, month, 0).getDate();
 
+  // Dagen vorige maand
   for (let i = startWeekDay - 1; i >= 0; i--) {
-    const dayDiv = document.createElement("div");
-    dayDiv.className = "day other-month";
-    dayDiv.innerHTML = `<span class="date-number" style="color: #ccc;">${prevMonthLastDate - i}</span>`;
-    calendarDays.appendChild(dayDiv);
+    calendarDays.innerHTML += `<div class="day other-month"><span class="date-number" style="color:#ccc;">${prevMonthLastDate - i}</span></div>`;
   }
 
+  // Dagen huidige maand
   for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
     const date = new Date(year, month, i);
     const isoDatum = date.toISOString().split("T")[0];
-    const dayDiv = document.createElement("div");
-    dayDiv.className = "day";
-    dayDiv.setAttribute("data-datum", isoDatum);
-
-    const dateLabel = document.createElement("span");
-    dateLabel.className = "date-number";
-    dateLabel.textContent = i;
-    dayDiv.appendChild(dateLabel);
-
-    if (today.toDateString() === date.toDateString()) {
-      dayDiv.classList.add("today");
-    }
-
-    calendarDays.appendChild(dayDiv);
+    calendarDays.innerHTML += `<div class="day${today.toDateString()===date.toDateString()?" today":""}" data-datum="${isoDatum}"><span class="date-number">${i}</span></div>`;
   }
 
+  // Dagen volgende maand
   const totalCells = calendarDays.children.length;
   const remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
-
   for (let i = 1; i <= remaining; i++) {
-    const dayDiv = document.createElement("div");
-    dayDiv.className = "day other-month";
-    dayDiv.innerHTML = `<span class="date-number" style="color: #ccc;">${i}</span>`;
-    calendarDays.appendChild(dayDiv);
+    calendarDays.innerHTML += `<div class="day other-month"><span class="date-number" style="color:#ccc;">${i}</span></div>`;
   }
 
+  // Events plaatsen
   events.forEach(ev => {
-    const start = new Date(ev.start?.dateTime || ev.start?.date);
-    let end = new Date(ev.end?.dateTime || ev.end?.date);
-    const isAllDay = !ev.start?.dateTime;
+    const startDate = ev.start?.dateTime || ev.start?.date;
+    const endDate = ev.end?.dateTime || ev.end?.date;
+    if (!startDate || !endDate) return;
 
-    if (isAllDay && ev.end?.date && !ev.end?.dateTime) {
-      end = new Date(new Date(ev.end.date).getTime() - 86400000);
+    const start = new Date(startDate);
+    let end = new Date(endDate);
+    if (!ev.start?.dateTime && ev.end?.date && !ev.end?.dateTime) {
+      end = new Date(end.getTime() - 86400000);
     }
 
     const startStr = `${start.getDate()} ${monthNames[start.getMonth()]} ${start.getFullYear()}`;
@@ -127,8 +125,7 @@ const renderCalendar = async () => {
     const rangeEnd = end > currentMonthEnd ? lastDayOfMonth.getDate() : end.getDate();
 
     for (let d = rangeStart; d <= rangeEnd; d++) {
-      const eventDate = new Date(year, month, d);
-      const iso = eventDate.toISOString().split("T")[0];
+      const iso = new Date(year, month, d).toISOString().split("T")[0];
       const dayEl = document.querySelector(`[data-datum="${iso}"]`);
       if (!dayEl) continue;
 
@@ -137,26 +134,24 @@ const renderCalendar = async () => {
       activity.textContent = eventTitleText;
       activity.style.backgroundColor = calendarColors[ev.calendarId] || "#444";
 
-      activity.addEventListener("click", (e) => {
-        e.stopPropagation();
-
-        const startStrClick = `${start.getDate()} ${monthNames[start.getMonth()]} ${start.getFullYear()}`;
-        const endStrClick = `${end.getDate()} ${monthNames[end.getMonth()]} ${end.getFullYear()}`;
-
-        if (startStrClick === endStrClick) {
-          eventTitle.textContent = `${eventTitleText} van ${startStrClick}`;
+      activity.addEventListener("click", () => {
+        // Titel aanpassen op basis van duur
+        if (startStr === endStr) {
+          eventTitle.textContent = `${eventTitleText} van ${startStr}`;
         } else {
           eventTitle.textContent = `${eventTitleText}`;
         }
 
+        // Tijd
         if (ev.start?.dateTime) {
           eventTime.textContent = `🕒 ${start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-        } else if (startStrClick !== endStrClick) {
-          eventTime.textContent = `⏳ Van ${startStrClick} tot ${endStrClick}`;
+        } else if (startStr !== endStr) {
+          eventTime.textContent = `⏳ Van ${startStr} tot ${endStr}`;
         } else {
           eventTime.textContent = "⏳ Hele dag";
         }
 
+        // Locatie & beschrijving
         eventLocation.textContent = `📍 ${ev.location || "Geen locatie"}`;
         eventDescription.textContent = `🗒️ ${ev.description || "Geen beschrijving"}`;
 
@@ -171,101 +166,33 @@ const renderCalendar = async () => {
   console.log("✅ Kalender gerenderd voor", monthNames[month], year);
 };
 
-prevMonth.addEventListener("click", () => {
-  currentDate.setMonth(currentDate.getMonth() - 1);
-  renderCalendar();
-});
-nextMonth.addEventListener("click", () => {
-  currentDate.setMonth(currentDate.getMonth() + 1);
-  renderCalendar();
-});
-todayBtn.addEventListener("click", () => {
-  currentDate = new Date(today.getFullYear(), today.getMonth(), 1);
-  selectedDay = null;
-  renderCalendar();
-});
+// 🔄 Navigatie
+prevMonth.addEventListener("click", () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); });
+nextMonth.addEventListener("click", () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); });
+todayBtn.addEventListener("click", () => { currentDate = new Date(today.getFullYear(), today.getMonth(), 1); renderCalendar(); });
 
-monthYear.addEventListener("click", (e) => {
-  const rect = e.target.getBoundingClientRect();
-  monthPopup.classList.remove("hidden");
-  monthPopup.style.top = `${rect.bottom + window.scrollY}px`;
-  monthPopup.style.left = `${rect.left}px`;
-
-  monthSelect.value = currentDate.getMonth();
-  yearSelect.value = currentDate.getFullYear();
-});
-
-window.addEventListener("click", (e) => {
-  if (!monthPopup.contains(e.target) && !monthYear.contains(e.target)) {
-    monthPopup.classList.add("hidden");
-  }
-});
-
-goToDateBtn.addEventListener("click", () => {
-  const m = parseInt(monthSelect.value);
-  const y = parseInt(yearSelect.value);
-  currentDate = new Date(y, m, 1);
-  selectedDay = null;
-  monthPopup.classList.add("hidden");
-  renderCalendar();
-});
-
-function closeEventModal() {
+// ❌ Modal sluiten functies
+function closeModal() {
   modal.classList.add("hidden");
   modalOverlay.classList.add("hidden");
-  const highlighted = document.querySelector(".highlight");
-  if (highlighted) highlighted.classList.remove("highlight");
-  const url = new URL(window.location);
-  url.searchParams.delete("datum");
-  window.history.replaceState({}, document.title, url.pathname);
 }
 
-document.getElementById("eventModal").querySelector("button").addEventListener("click", closeEventModal);
-modalOverlay.addEventListener("click", closeEventModal);
+// Klik op kruisje
+closeModalBtn.addEventListener("click", closeModal);
 
+// Klik op overlay
+modalOverlay.addEventListener("click", closeModal);
+
+// Druk op Escape
 document.addEventListener("keydown", (e) => {
-  if (!modal.classList.contains("hidden") && (e.key === "Escape" || e.key === "Enter")) {
-    closeEventModal();
-  }
+  if (e.key === "Escape") closeModal();
 });
 
-function scrollNaarDatum(datum) {
-  const geselecteerde = new Date(datum);
-  const datumPlus1 = new Date(geselecteerde.getTime() - 1);
-  const iso = datumPlus1.toISOString().split("T")[0];
-
-  const dayEl = document.querySelector(`[data-datum="${iso}"]`) || document.querySelector(`[data-datum="${datum}"]`);
-  if (!dayEl) return;
-
-  dayEl.scrollIntoView({ behavior: "smooth", block: "center" });
-  dayEl.classList.add("highlight");
-
-  const firstActivity = dayEl.querySelector(".activity-range");
-  if (firstActivity) {
-    firstActivity.click();
-  }
-}
-
+// 📅 Init
 (() => {
-  const params = new URLSearchParams(window.location.search);
-  const geselecteerdeDatum = params.get("datum");
-
-  if (geselecteerdeDatum) {
-    const datumParts = geselecteerdeDatum.split("-");
-    if (datumParts.length === 3) {
-      const jaar = parseInt(datumParts[0]);
-      const maand = parseInt(datumParts[1]) - 1;
-      currentDate = new Date(jaar, maand, 1);
-    }
-  }
-
   renderCalendar().then(() => {
     console.log("📅 Eerste render klaar");
     document.getElementById("calendarWrapper").style.display = "block";
     document.getElementById("loading").style.display = "none";
-
-    if (geselecteerdeDatum) {
-      scrollNaarDatum(geselecteerdeDatum);
-    }
   });
 })();

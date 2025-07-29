@@ -6,14 +6,17 @@ Template Name: Homepagina
 get_header();
 ?>
 
-<main>
-  <?php
+<?php
     get_template_part('components/homeheaderblok');
-    get_template_part('components/wisselwoord');
-    get_template_part('components/uitlegblok');
-    get_template_part('components/specialeact');
-    get_template_part('components/hoofdleiding');
-  ?>
+?>
+
+<main>
+  <div class="maincontainer">
+    <?php get_template_part('components/wisselwoord'); ?>
+    <?php get_template_part('components/uitlegblok'); ?>
+    <?php get_template_part('components/specialeact'); ?>
+    <?php get_template_part('components/hoofdleiding'); ?>
+  </div>
 </main>
 
 <?php

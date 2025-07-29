@@ -35,7 +35,7 @@ h1{
   background-color: hsl(0, 100%, 50%);
   border-radius: 10px;
   border: none;
-  margin: 0.5rem auto 0 auto; /* ✅ met punt in plaats van komma */
+  margin: 0px auto; /* ✅ met punt in plaats van komma */
   color: white;
   text-decoration: none;
   cursor: pointer;
@@ -65,9 +65,8 @@ header {
   gap: 20px;
 }
 
-.headerhome{
+.headerhome {
   color: white;
-  background-image: url(img/Groepsfotobewerkt.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -90,9 +89,13 @@ header h1 {
 }
 
 main{
-    margin: 0px auto;
-    padding: 0px 1vw;
-    max-width: 1100px;
+  width: 100%;
+}
+
+.maincontainer{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 /* Footer */
@@ -234,7 +237,7 @@ footer {
 .navcontainerjrk {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 50px;
+  padding: 0 1rem;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -311,6 +314,10 @@ footer {
   .hamburger {
     display: block;
   }
+  
+  .navcontainerjrk{
+    padding: 0 2rem;
+  }
 
   .navmenujrk {
     display: none;
@@ -323,20 +330,20 @@ footer {
     align-items: flex-start;
     justify-content: flex-start;
     background-color: hsl(0, 0%, 20%);
-    padding: 7.5rem 0;
+    padding: 7.5rem 1rem;
     gap: 20px;
     z-index: 999;
   }
 
   .navmenujrk.show {
     display: block;
-    padding: 7.5rem 0rem;
+    padding: 7.5rem 1rem;
   }
 
   .navmenujrk li a {
     font-size: 1.5rem;
     color: white;
-    padding: 10px 0px;
+    padding: 0.8rem 0;
     text-align: left;
     border-bottom: 1px solid #CCC;
     display: block;
@@ -397,17 +404,18 @@ footer {
 
 
 /* JRK met wisselwoord */
-.wisselwoordcontent{
-  width: 90%;
+.wisselwoordcontent {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  gap: 2vw;
-  margin: 4rem auto;
+  align-items: stretch;
+  gap: 2rem; /* ✅ Iets consistenter dan 2vw */
+  margin: 4rem 0; /* ✅ Auto eruit, container centreert al */
 }
 
 .jrkwisselwoord, .jrkwisselwoordtxt{
-  width: 50%;
+  flex: 1 1 50%;    /* verdeelt automatisch de overgebleven ruimte */
+  min-width: 0;
 }
 
 .jrkwisselwoord h2{
@@ -430,11 +438,11 @@ footer {
 }
 
 /* Sectie over jrk */
-.introjrk{
+.introjrk {
   display: flex;
   flex-direction: column;
-  width: 90%;
-  margin: 4rem auto;
+  width: 100%;
+  margin: 4rem 0;
   gap: 3rem;
 }
 
@@ -485,8 +493,8 @@ footer {
 
 #speciale-activiteiten {
   text-align: left;
-  margin: 4rem auto;
-  width: 90%;
+  margin: 2rem 0; /* Zelfde marge voor consistentie */
+  width: 100%;
 }
 
 #speciale-activiteiten-container {
@@ -551,16 +559,16 @@ footer {
 
 /* Hoofdleiding */
 
-.contactleiding{
-  width: 90%;
-  margin: 4rem auto;
+.contactleiding {
+  width: 100%;
+  margin: 2rem 0;
 }
 .hoofdleiding {
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: center;
   gap: 2rem;
-  margin: 4rem 0px;
+  margin: 1rem 0px;
   width: 100%;
 }
 
@@ -568,7 +576,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  padding: 1rem;
+  padding: 0.5rem;
   max-width: 50%;
   flex: 1 1 20%;
 }
@@ -606,6 +614,7 @@ footer {
   .hoofdleiding {
     flex-direction: column;
     align-items: flex-start;
+    justify-content: left;
   }
 
   .persoon {

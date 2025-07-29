@@ -7,54 +7,60 @@ function jrk_enqueue_scripts() {
         wp_enqueue_style('jrk-custom-style', get_template_directory_uri() . '/custom.css');
     }
 
-    // config.js is niet meer nodig voor API key
-    if (file_exists(get_template_directory() . '/config.js')) {
-        wp_enqueue_script('jrk-config', get_template_directory_uri() . '/config.js', [], null, true);
+// Homepagina: index.js + wisselwoorden + hoofdleidingdata
+if (is_front_page()) {
+    wp_register_script('jrk-index', get_template_directory_uri() . '/index.js', [], null, true);
+
+    // ➕ Haal alle leiding op voor JS
+    $leiding = [];
+    $leiding_posts = get_posts([
+        'post_type' => 'leiding',
+        'posts_per_page' => -1
+    ]);
+
+    foreach ($leiding_posts as $lid) {
+        $leiding[] = [
+            'voornaam' => get_field('voornaam', $lid->ID),
+            'achternaam' => get_field('achternaam', $lid->ID),
+            'email' => get_field('email', $lid->ID),
+            'telefoon' => get_field('telefoon', $lid->ID),
+            'foto' => get_field('foto', $lid->ID),
+            'rollen' => get_field('rollen', $lid->ID),
+            'groepen' => get_field('groepen', $lid->ID)
+        ];
     }
 
-    // Homepagina: index.js + wisselwoorden + hoofdleidingdata
-    if (is_front_page()) {
-        wp_register_script('jrk-index', get_template_directory_uri() . '/index.js', ['jrk-config'], null, true);
+    wp_localize_script('jrk-index', 'leidingData', ['leiding' => $leiding]);
 
-        // ➕ Haal alle leiding op voor JS
-        $leiding = [];
-        $leiding_posts = get_posts([
-            'post_type' => 'leiding',
-            'posts_per_page' => -1
-        ]);
-
-        foreach ($leiding_posts as $lid) {
-            $leiding[] = [
-                'voornaam' => get_field('voornaam', $lid->ID),
-                'achternaam' => get_field('achternaam', $lid->ID),
-                'email' => get_field('email', $lid->ID),
-                'telefoon' => get_field('telefoon', $lid->ID),
-                'foto' => get_field('foto', $lid->ID),
-                'rollen' => get_field('rollen', $lid->ID),
-                'groepen' => get_field('groepen', $lid->ID)
-            ];
-        }
-
-        wp_localize_script('jrk-index', 'leidingData', ['leiding' => $leiding]);
-
-        // Voeg wisselwoorden ook toe
-        $wisselwoorden = get_field('wisselwoorden', get_option('page_on_front'));
-        if ($wisselwoorden) {
-            $woorden = array_map(fn($item) => $item['woord'], $wisselwoorden);
-            wp_localize_script('jrk-index', 'wisselData', ['woorden' => $woorden]);
-        }
-
-        wp_enqueue_script('jrk-index');
+    // Voeg wisselwoorden toe
+    $wisselwoorden = get_field('wisselwoorden', get_option('page_on_front'));
+    if ($wisselwoorden) {
+        $woorden = array_map(fn($item) => $item['woord'], $wisselwoorden);
+        wp_localize_script('jrk-index', 'wisselData', ['woorden' => $woorden]);
     }
+
+    // 🔑 Voeg REST endpoint toe voor speciale activiteiten
+    wp_localize_script('jrk-index', 'jrkCalendar', [
+        'restUrl' => esc_url(rest_url('jrk/v1/calendar'))
+    ]);
+
+    wp_enqueue_script('jrk-index');
+}
 
     // Kalenderpagina
     if (is_page('kalender') && file_exists(get_template_directory() . '/kalender.js')) {
-        wp_enqueue_script('jrk-kalender', get_template_directory_uri() . '/kalender.js', ['jrk-config'], null, true);
+        wp_enqueue_script('jrk-kalender', get_template_directory_uri() . '/kalender.js', [], null, true);
+
+        // API Key + REST endpoint naar JS sturen
+        wp_localize_script('jrk-kalender', 'jrkCalendar', [
+            'apiKey' => JRK_GOOGLE_CALENDAR_KEY,
+            'restUrl' => esc_url(rest_url('jrk/v1/calendar'))
+        ]);
     }
 
     // Groepenpagina
     if (is_page_template('groepen.php') && file_exists(get_template_directory() . '/groepen.js')) {
-        wp_register_script('jrk-groepen', get_template_directory_uri() . '/groepen.js', ['jrk-config'], null, true);
+        wp_register_script('jrk-groepen', get_template_directory_uri() . '/groepen.js', [], null, true);
     
         // ✅ ➕ Bouw data-array voor groepenpagina
         $groepenData = ['groepen' => []];
@@ -106,12 +112,6 @@ function jrk_enqueue_scripts() {
     
         wp_enqueue_script('jrk-groepen');
     }
-
-    // Globale data voor elke JS
-    wp_localize_script('jrk-config', 'jrkData', [
-        'themeUrl' => get_template_directory_uri(),
-        'siteUrl' => get_site_url()
-    ]);
 }
 add_action('wp_enqueue_scripts', 'jrk_enqueue_scripts');
 
@@ -234,11 +234,11 @@ add_action('rest_api_init', function () {
         'methods' => 'GET',
         'callback' => function (WP_REST_Request $request) {
             $calendarIds = [
-                'woutvanlommel7@gmail.com',
                 '9f8aecf23be1e8387aa31872f5df2a5308dde848a01f854f9db282cad285b683@group.calendar.google.com',
                 '0baaf1cea005548f41707e9942f8fe0733e31efe6b654b71f90ac65196da9fcf@group.calendar.google.com',
                 'b940058507355683160f31fa21ce080c434a4b3344447e355e402a7a4bfa7d84@group.calendar.google.com',
-                '7b5c3807b7714e41c9260b40a1ae2ecde3042aa4c1f6dc23715c8b5d951b303c@group.calendar.google.com'
+                '7b5c3807b7714e41c9260b40a1ae2ecde3042aa4c1f6dc23715c8b5d951b303c@group.calendar.google.com',
+                '5578d000dbaac65888adf7dbd787d7c7187386ae40ca78e20f3859e5487ffa9e@group.calendar.google.com'
             ];
 
             $timeMin = $request->get_param('timeMin') ?: gmdate('c');
@@ -248,8 +248,6 @@ add_action('rest_api_init', function () {
             foreach ($calendarIds as $id) {
                 $url = add_query_arg([
                     'key' => JRK_GOOGLE_CALENDAR_KEY,
-                    'timeMin' => $timeMin,
-                    'timeMax' => $timeMax,
                     'singleEvents' => 'true',
                     'orderBy' => 'startTime'
                 ], "https://www.googleapis.com/calendar/v3/calendars/" . urlencode($id) . "/events");
@@ -270,4 +268,10 @@ add_action('rest_api_init', function () {
         },
         'permission_callback' => '__return_true'
     ]);
+});
+
+add_action('init', function(){
+    $test_url = "https://www.googleapis.com/calendar/v3/calendars/0baaf1cea005548f41707e9942f8fe0733e31efe6b654b71f90ac65196da9fcf@group.calendar.google.com/events?key=" . JRK_GOOGLE_CALENDAR_KEY;
+    $res = wp_remote_get($test_url);
+    error_log("📡 Test API response: " . print_r($res, true));
 });
