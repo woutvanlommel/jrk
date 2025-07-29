@@ -1,14 +1,7 @@
 console.log("✅ kalender.js is geladen");
 
-console.log(API_KEY); // 👉 dit werkt perfect (toont: abc123)
-
-const CALENDAR_ID = [
-  "woutvanlommel7@gmail.com",
-  "9f8aecf23be1e8387aa31872f5df2a5308dde848a01f854f9db282cad285b683@group.calendar.google.com",
-  "0baaf1cea005548f41707e9942f8fe0733e31efe6b654b71f90ac65196da9fcf@group.calendar.google.com",
-  "b940058507355683160f31fa21ce080c434a4b3344447e355e402a7a4bfa7d84@group.calendar.google.com",
-  "7b5c3807b7714e41c9260b40a1ae2ecde3042aa4c1f6dc23715c8b5d951b303c@group.calendar.google.com"
-];
+// 🎯 REST endpoint i.p.v. API key direct
+const API_ENDPOINT = `${jrkData.siteUrl}/wp-json/jrk/v1/calendar`;
 
 const calendarColors = {
   "woutvanlommel7@gmail.com": "#FFE135",
@@ -50,29 +43,17 @@ async function fetchEvents(year, month) {
   console.log("🔄 fetchEvents start:", year, month + 1);
   const timeMin = new Date(year, month, 1).toISOString();
   const timeMax = new Date(year, month + 1, 0, 23, 59, 59).toISOString();
-  let allEvents = [];
 
-  for (const calendarId of CALENDAR_ID) {
-    const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events?key=${API_KEY}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=true&orderBy=startTime`;
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      const items = data.items || [];
-      console.log(`📥 Events van ${calendarId}:`, items.length);
-
-      items.forEach(item => {
-        item.calendarId = calendarId;
-      });
-
-      allEvents = allEvents.concat(items);
-    } catch (error) {
-      console.error(`❌ Fout bij ophalen van events (${calendarId}):`, error);
-    }
+  try {
+    const url = `${API_ENDPOINT}?timeMin=${encodeURIComponent(timeMin)}&timeMax=${encodeURIComponent(timeMax)}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("📥 Events opgehaald:", data.length);
+    return data;
+  } catch (error) {
+    console.error("❌ Fout bij ophalen van events:", error);
+    return [];
   }
-
-  console.log("📊 Totaal aantal events opgehaald:", allEvents.length);
-  return allEvents;
 }
 
 const renderCalendar = async () => {
@@ -158,28 +139,27 @@ const renderCalendar = async () => {
 
       activity.addEventListener("click", (e) => {
         e.stopPropagation();
-      
-        const eventTitleText = ev.summary || "Activiteit";
-        const startStr = `${start.getDate()} ${monthNames[start.getMonth()]} ${start.getFullYear()}`;
-        const endStr = `${end.getDate()} ${monthNames[end.getMonth()]} ${end.getFullYear()}`;
-      
-        if (startStr === endStr) {
-          eventTitle.textContent = `${eventTitleText} van ${startStr}`;
+
+        const startStrClick = `${start.getDate()} ${monthNames[start.getMonth()]} ${start.getFullYear()}`;
+        const endStrClick = `${end.getDate()} ${monthNames[end.getMonth()]} ${end.getFullYear()}`;
+
+        if (startStrClick === endStrClick) {
+          eventTitle.textContent = `${eventTitleText} van ${startStrClick}`;
         } else {
           eventTitle.textContent = `${eventTitleText}`;
         }
-      
+
         if (ev.start?.dateTime) {
           eventTime.textContent = `🕒 ${start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-        } else if (startStr !== endStr) {
-          eventTime.textContent = `⏳ Van ${startStr} tot ${endStr}`;
+        } else if (startStrClick !== endStrClick) {
+          eventTime.textContent = `⏳ Van ${startStrClick} tot ${endStrClick}`;
         } else {
           eventTime.textContent = "⏳ Hele dag";
         }
-      
+
         eventLocation.textContent = `📍 ${ev.location || "Geen locatie"}`;
         eventDescription.textContent = `🗒️ ${ev.description || "Geen beschrijving"}`;
-      
+
         modal.classList.remove("hidden");
         modalOverlay.classList.remove("hidden");
       });

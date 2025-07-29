@@ -128,9 +128,9 @@ function laadHoofdleiding() {
     div.className = "persoon";
 
     div.innerHTML = `
-      <img src="${persoon.foto}" alt="Hoofdleiding ${persoon.naam}">
+      <img src="${persoon.foto}" alt="Hoofdleiding ${persoon.voornaam}">
       <div class="persooninfo">
-        <h4>${persoon.naam}</h4>
+        <h4>${persoon.voornaam}</h4>
         <a href="tel:${persoon.telefoon}">📞 ${persoon.telefoon}</a>
         <a href="mailto:${persoon.email}">✉️ ${persoon.email}</a>
       </div>

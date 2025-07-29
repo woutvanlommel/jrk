@@ -7,7 +7,7 @@ function jrk_enqueue_scripts() {
         wp_enqueue_style('jrk-custom-style', get_template_directory_uri() . '/custom.css');
     }
 
-    // config.js (altijd eerst)
+    // config.js is niet meer nodig voor API key
     if (file_exists(get_template_directory() . '/config.js')) {
         wp_enqueue_script('jrk-config', get_template_directory_uri() . '/config.js', [], null, true);
     }
@@ -25,11 +25,13 @@ function jrk_enqueue_scripts() {
 
         foreach ($leiding_posts as $lid) {
             $leiding[] = [
-                'naam' => get_the_title($lid->ID),
+                'voornaam' => get_field('voornaam', $lid->ID),
+                'achternaam' => get_field('achternaam', $lid->ID),
                 'email' => get_field('email', $lid->ID),
                 'telefoon' => get_field('telefoon', $lid->ID),
                 'foto' => get_field('foto', $lid->ID),
-                'rollen' => get_field('rollen', $lid->ID)
+                'rollen' => get_field('rollen', $lid->ID),
+                'groepen' => get_field('groepen', $lid->ID)
             ];
         }
 
@@ -81,13 +83,14 @@ function jrk_enqueue_scripts() {
             $leiding_array = [];
             foreach ($leidingleden as $lid) {
                 $leiding_array[] = [
-                    'naam' => get_the_title($lid->ID),
+                    'voornaam' => get_field('voornaam', $lid->ID),
                     'achternaam' => get_field('achternaam', $lid->ID),
                     'email' => get_field('email', $lid->ID),
                     'telefoon' => get_field('telefoon', $lid->ID),
                     'foto' => get_field('foto', $lid->ID),
                     'favorieteAct' => get_field('favorieteAct', $lid->ID),
-                    'verjaardag' => get_field('verjaardag', $lid->ID)
+                    'verjaardag' => get_field('verjaardag', $lid->ID),
+                    'rollen' => get_field('rollen', $lid->ID)
                 ];
             }
     
@@ -161,26 +164,39 @@ add_action('init', 'jrk_register_custom_post_types');
 // 🔤 ACF-velden registreren
 if (function_exists('acf_add_local_field_group')) {
 
+    // Dynamisch alle groepen ophalen voor select veld
+    $groepen_choices = [];
+    $groepen_posts = get_posts(['post_type' => 'groepen', 'posts_per_page' => -1]);
+    foreach ($groepen_posts as $groep) {
+        $groepen_choices[$groep->post_title] = $groep->post_title;
+    }
+
     // Leiding
     acf_add_local_field_group([
         'key' => 'leiding_velden',
         'title' => 'Leidinggegevens',
         'fields' => [
+            ['key' => 'leiding_voornaam', 'label' => 'Voornaam', 'name' => 'voornaam', 'type' => 'text'],
             ['key' => 'leiding_achternaam', 'label' => 'Achternaam', 'name' => 'achternaam', 'type' => 'text'],
             ['key' => 'leiding_email', 'label' => 'E-mail', 'name' => 'email', 'type' => 'email'],
             ['key' => 'leiding_telefoon', 'label' => 'Telefoonnummer', 'name' => 'telefoon', 'type' => 'text'],
             ['key' => 'leiding_favoriete_act', 'label' => 'Favoriete activiteit', 'name' => 'favorieteAct', 'type' => 'text'],
             ['key' => 'leiding_verjaardag', 'label' => 'Verjaardag', 'name' => 'verjaardag', 'type' => 'text'],
             ['key' => 'leiding_foto', 'label' => 'Foto', 'name' => 'foto', 'type' => 'image', 'return_format' => 'url'],
+
+            // Dynamische groepen-selectie
             [
                 'key' => 'leiding_groepen',
                 'label' => 'Groepen',
                 'name' => 'groepen',
-                'type' => 'checkbox',
-                'choices' => [],
-                'allow_custom' => 1,
+                'type' => 'select',
+                'choices' => $groepen_choices,
+                'multiple' => 1,
+                'ui' => 1,
+                'return_format' => 'value',
                 'layout' => 'vertical'
             ],
+
             [
                 'key' => 'leiding_rollen',
                 'label' => 'Rollen',
@@ -210,3 +226,48 @@ if (function_exists('acf_add_local_field_group')) {
         'location' => [[['param' => 'post_type', 'operator' => '==', 'value' => 'groepen']]]
     ]);
 }
+
+
+// 🔑 REST endpoint voor Google Calendar events
+add_action('rest_api_init', function () {
+    register_rest_route('jrk/v1', '/calendar', [
+        'methods' => 'GET',
+        'callback' => function (WP_REST_Request $request) {
+            $calendarIds = [
+                'woutvanlommel7@gmail.com',
+                '9f8aecf23be1e8387aa31872f5df2a5308dde848a01f854f9db282cad285b683@group.calendar.google.com',
+                '0baaf1cea005548f41707e9942f8fe0733e31efe6b654b71f90ac65196da9fcf@group.calendar.google.com',
+                'b940058507355683160f31fa21ce080c434a4b3344447e355e402a7a4bfa7d84@group.calendar.google.com',
+                '7b5c3807b7714e41c9260b40a1ae2ecde3042aa4c1f6dc23715c8b5d951b303c@group.calendar.google.com'
+            ];
+
+            $timeMin = $request->get_param('timeMin') ?: gmdate('c');
+            $timeMax = $request->get_param('timeMax');
+
+            $events = [];
+            foreach ($calendarIds as $id) {
+                $url = add_query_arg([
+                    'key' => JRK_GOOGLE_CALENDAR_KEY,
+                    'timeMin' => $timeMin,
+                    'timeMax' => $timeMax,
+                    'singleEvents' => 'true',
+                    'orderBy' => 'startTime'
+                ], "https://www.googleapis.com/calendar/v3/calendars/" . urlencode($id) . "/events");
+
+                $response = wp_remote_get($url);
+                if (!is_wp_error($response)) {
+                    $data = json_decode(wp_remote_retrieve_body($response), true);
+                    if (!empty($data['items'])) {
+                        foreach ($data['items'] as &$item) {
+                            $item['calendarId'] = $id;
+                        }
+                        $events = array_merge($events, $data['items']);
+                    }
+                }
+            }
+
+            return $events;
+        },
+        'permission_callback' => '__return_true'
+    ]);
+});

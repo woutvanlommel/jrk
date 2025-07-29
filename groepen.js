@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
     content.innerHTML = "";
 
     const sortedLeiding = groep.leiding.sort((a, b) => {
-      const naamA = `${a.naam} ${a.achternaam}`.toLowerCase();
-      const naamB = `${b.naam} ${b.achternaam}`.toLowerCase();
+      const naamA = `${a.voornaam} ${a.achternaam}`.toLowerCase();
+      const naamB = `${b.voornaam} ${b.achternaam}`.toLowerCase();
       return naamA.localeCompare(naamB);
     });
 
@@ -51,9 +51,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const pDiv = document.createElement("div");
       pDiv.className = "leidingkaart";
       pDiv.innerHTML = `
-        <img src="${p.foto}" alt="${p.naam}">
+        <img src="${p.foto}" alt="${p.voornaam}">
         <div class="leidinginfo">
-            <h4>${p.naam} ${p.achternaam}</h4>
+            <h4>${p.voornaam} ${p.achternaam}</h4>
             ${p.telefoon ? `<a href="tel:${p.telefoon}">📞 ${p.telefoon}</a>` : ""}
             ${p.email ? `<a href="mailto:${p.email}">✉️ ${p.email}</a>` : ""}
             ${p.favorieteAct ? `<p>❤ ${p.favorieteAct}</p>` : ""}
